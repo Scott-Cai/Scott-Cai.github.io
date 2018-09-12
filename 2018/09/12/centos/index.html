@@ -7,18 +7,18 @@
   
   <title>Scott-Cai</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Win10使用VirtualBox搭建Centos私有云搭建Ubuntu私有云参照队友：Win10搭建Ubuntu私有云 1. 实验目的 初步了解虚拟化技术，理解云计算的相关概念 为后续课程提供统一的编程与实验环境 理解系统工程师面临的困境  2. 实验环境与要求 环境：硬件虚拟化（AMD-V 或 Intel-VT）支持 要求：用户通过互联网，使用微软远程桌面，远程访问你在PC机上创建的虚拟机">
+  <meta name="description" content="Win10浣跨敤VirtualBox鎼缓Centos绉佹湁浜�?鎼缓Ubuntu绉佹湁浜戝弬鐓ч槦鍙嬶細[Win10鎼缓Ubuntu绉佹湁浜�?(https://palette25.github.io/2018/09/08/Serive-Computing-Install-Personal-Cloud/) 1. 瀹為獙鐩殑 鍒濇浜嗚В铏氭嫙鍖栨妧鏈紝鐞嗚В浜戣绠楃殑鐩稿叧姒傚康">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scott-Cai">
 <meta property="og:url" content="https://Scott-Cai.github.io/2018/09/12/centos/index.html">
 <meta property="og:site_name" content="Scott-Cai">
-<meta property="og:description" content="Win10使用VirtualBox搭建Centos私有云搭建Ubuntu私有云参照队友：Win10搭建Ubuntu私有云 1. 实验目的 初步了解虚拟化技术，理解云计算的相关概念 为后续课程提供统一的编程与实验环境 理解系统工程师面临的困境  2. 实验环境与要求 环境：硬件虚拟化（AMD-V 或 Intel-VT）支持 要求：用户通过互联网，使用微软远程桌面，远程访问你在PC机上创建的虚拟机">
+<meta property="og:description" content="Win10浣跨敤VirtualBox鎼缓Centos绉佹湁浜�?鎼缓Ubuntu绉佹湁浜戝弬鐓ч槦鍙嬶細[Win10鎼缓Ubuntu绉佹湁浜�?(https://palette25.github.io/2018/09/08/Serive-Computing-Install-Personal-Cloud/) 1. 瀹為獙鐩殑 鍒濇浜嗚В铏氭嫙鍖栨妧鏈紝鐞嗚В浜戣绠楃殑鐩稿叧姒傚康">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://scott-cai.github.io/Desktop/1.png">
-<meta property="og:updated_time" content="2018-09-11T16:51:15.145Z">
+<meta property="og:updated_time" content="2018-09-12T01:15:40.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Scott-Cai">
-<meta name="twitter:description" content="Win10使用VirtualBox搭建Centos私有云搭建Ubuntu私有云参照队友：Win10搭建Ubuntu私有云 1. 实验目的 初步了解虚拟化技术，理解云计算的相关概念 为后续课程提供统一的编程与实验环境 理解系统工程师面临的困境  2. 实验环境与要求 环境：硬件虚拟化（AMD-V 或 Intel-VT）支持 要求：用户通过互联网，使用微软远程桌面，远程访问你在PC机上创建的虚拟机">
+<meta name="twitter:description" content="Win10浣跨敤VirtualBox鎼缓Centos绉佹湁浜�?鎼缓Ubuntu绉佹湁浜戝弬鐓ч槦鍙嬶細[Win10鎼缓Ubuntu绉佹湁浜�?(https://palette25.github.io/2018/09/08/Serive-Computing-Install-Personal-Cloud/) 1. 瀹為獙鐩殑 鍒濇浜嗚В铏氭嫙鍖栨妧鏈紝鐞嗚В浜戣绠楃殑鐩稿叧姒傚康">
 <meta name="twitter:image" content="https://scott-cai.github.io/Desktop/1.png">
   
     <link rel="alternate" href="/Scott-Cai.github.io/atom.xml" title="Scott-Cai" type="application/atom+xml">
@@ -78,113 +78,113 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Win10使用VirtualBox搭建Centos私有云"><a href="#Win10使用VirtualBox搭建Centos私有云" class="headerlink" title="  Win10使用VirtualBox搭建Centos私有云"></a><center>  Win10使用VirtualBox搭建Centos私有云</center></h1><p>搭建Ubuntu私有云参照队友：<a href="https://palette25.github.io/2018/09/08/Serive-Computing-Install-Personal-Cloud/" target="_blank" rel="noopener">Win10搭建Ubuntu私有云</a></p>
-<h2 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a><strong>1. 实验目的</strong></h2><ol>
-<li>初步了解虚拟化技术，理解云计算的相关概念</li>
-<li>为后续课程提供统一的编程与实验环境</li>
-<li>理解系统工程师面临的困境</li>
+        <h1 id="Win10浣跨敤VirtualBox鎼缓Centos绉佹湁浜�"><a href="#Win10浣跨敤VirtualBox鎼缓Centos绉佹湁浜�" class="headerlink" title="  Win10浣跨敤VirtualBox鎼缓Centos绉佹湁浜�?"></a><center>  Win10浣跨敤VirtualBox鎼缓Centos绉佹湁浜�?</center></h1><p>鎼缓Ubuntu绉佹湁浜戝弬鐓ч槦鍙嬶細[Win10鎼缓Ubuntu绉佹湁浜�?(<a href="https://palette25.github.io/2018/09/08/Serive-Computing-Install-Personal-Cloud/" target="_blank" rel="noopener">https://palette25.github.io/2018/09/08/Serive-Computing-Install-Personal-Cloud/</a>)</p>
+<h2 id="1-瀹為獙鐩殑"><a href="#1-瀹為獙鐩殑" class="headerlink" title="1. 瀹為獙鐩殑"></a><strong>1. 瀹為獙鐩殑</strong></h2><ol>
+<li>鍒濇浜嗚В铏氭嫙鍖栨妧鏈紝鐞嗚В浜戣绠楃殑鐩稿叧姒傚康</li>
+<li>涓哄悗缁绋嬫彁渚涚粺涓€鐨勭紪绋嬩笌瀹為獙鐜</li>
+<li>鐞嗚В绯荤粺宸ョ▼甯堥潰涓寸殑鍥板�?</li>
 </ol>
-<h2 id="2-实验环境与要求"><a href="#2-实验环境与要求" class="headerlink" title="2. 实验环境与要求"></a><strong>2. 实验环境与要求</strong></h2><ol>
-<li>环境：硬件虚拟化（AMD-V 或 Intel-VT）支持</li>
-<li>要求：用户通过互联网，使用微软远程桌面，远程访问你在PC机上创建的虚拟机；<br>本次实验选择的是虚拟机操作系统 Centos，能使用 NAT 访问外网。</li>
+<h2 id="2-瀹為獙鐜涓庤姹�"><a href="#2-瀹為獙鐜涓庤姹�" class="headerlink" title="2. 瀹為獙鐜涓庤姹�?"></a><strong>2. 瀹為獙鐜涓庤姹�?</strong></h2><ol>
+<li>鐜锛氱‖浠惰櫄鎷熷寲锛圓MD-V 鎴� Intel-VT锛夋敮鎸�?</li>
+<li>瑕佹眰锛氱敤鎴烽€氳繃浜掕仈缃戯紝浣跨敤寰蒋杩滅▼妗岄潰锛岃繙绋嬭闂綘鍦≒C鏈轰笂鍒涘缓鐨勮櫄鎷熸満锛�<br>鏈瀹為獙閫夋嫨鐨勬槸铏氭嫙鏈烘搷浣滅郴缁� Centos锛岃兘浣跨敤 NAT 璁块棶澶栫綉銆�</li>
 </ol>
-<h2 id="3-实验内容与过程"><a href="#3-实验内容与过程" class="headerlink" title="3. 实验内容与过程"></a><strong>3. 实验内容与过程</strong></h2><h3 id="实验准备"><a href="#实验准备" class="headerlink" title="实验准备"></a><strong>实验准备</strong></h3><ol>
-<li>下载安装 VirtualBox：<a href="https://www.virtualbox.org/" target="_blank" rel="noopener">官网</a></li>
-<li>下载安装Git客户端（git bash): <a href="https://gitforwindows.org/" target="_blank" rel="noopener">git for Windows</a></li>
-<li>下载Linux发行版镜像： <a href="https://www.centos.org/download/" target="_blank" rel="noopener">Centos Minimal ISO</a></li>
+<h2 id="3-瀹為獙鍐呭涓庤繃绋�"><a href="#3-瀹為獙鍐呭涓庤繃绋�" class="headerlink" title="3. 瀹為獙鍐呭涓庤繃绋�?"></a><strong>3. 瀹為獙鍐呭涓庤繃绋�?</strong></h2><h3 id="瀹為獙鍑嗗"><a href="#瀹為獙鍑嗗" class="headerlink" title="瀹為獙鍑嗗"></a><strong>瀹為獙鍑嗗</strong></h3><ol>
+<li>涓嬭浇瀹夎�? VirtualBox锛歔瀹樼綉](<a href="https://www.virtualbox.org/" target="_blank" rel="noopener">https://www.virtualbox.org/</a>)</li>
+<li>涓嬭浇瀹夎Git瀹㈡埛绔紙git bash): <a href="https://gitforwindows.org/" target="_blank" rel="noopener">git for Windows</a></li>
+<li>涓嬭浇Linux鍙戣鐗堥暅鍍忥�? <a href="https://www.centos.org/download/" target="_blank" rel="noopener">Centos Minimal ISO</a></li>
 </ol>
-<h3 id="VirtualBox-配置"><a href="#VirtualBox-配置" class="headerlink" title="VirtualBox 配置"></a><strong>VirtualBox 配置</strong></h3><ol>
-<li>配置 VirtualBox 虚拟机存储位置，避免找不到虚拟机存储位置，特别是消耗启动盘的宝贵空间</li>
+<h3 id="VirtualBox-閰嶇�"><a href="#VirtualBox-閰嶇�" class="headerlink" title="VirtualBox 閰嶇�?"></a><strong>VirtualBox 閰嶇�?</strong></h3><ol>
+<li>閰嶇�? VirtualBox 铏氭嫙鏈哄瓨鍌ㄤ綅缃紝閬垮厤鎵句笉鍒拌櫄鎷熸満瀛樺偍浣嶇疆锛岀壒鍒槸娑堣€楀惎鍔ㄧ洏鐨勫疂璐电┖闂�</li>
 </ol>
 <ul>
-<li>VirtualBox菜单 ：管理 -&gt; 全局设定，常规页面</li>
+<li>VirtualBox鑿滃�? 锛氱鐞�? -&gt; 鍏ㄥ眬璁惧畾锛屽父瑙勯〉闈�?</li>
 </ul>
 <ol start="2">
-<li>创建虚拟机内部虚拟网络，使得 Vbox 内部虚拟机可以通过它，实现虚拟机之间、虚拟机与主机的通讯</li>
+<li>鍒涘缓铏氭嫙鏈哄唴閮ㄨ櫄鎷熺綉缁滐紝浣垮�? Vbox 鍐呴儴铏氭嫙鏈哄彲浠ラ€氳繃瀹冿紝瀹炵幇铏氭嫙鏈轰箣闂淬€佽櫄鎷熸満涓庝富鏈虹殑閫氳�?</li>
 </ol>
 <ul>
-<li>VirtualBox菜单 ：管理 -&gt; 主机网络管理器，创建一块虚拟网卡，将网卡改为手动配置，自行修改Ipv4地址，网址分配：192.168.100.1/24。作为虚拟内部网络host的地址</li>
-<li>在主机 windows 命令行窗口输入 ipconfig 就可以看到 VirtualBox Host-Only Network: 的网卡</li>
+<li>VirtualBox鑿滃�? 锛氱鐞�? -&gt; 涓绘満缃戠粶绠＄悊鍣紝鍒涘缓涓€鍧楄櫄鎷熺綉鍗★紝灏嗙綉鍗℃敼涓烘墜鍔ㄩ厤缃紝鑷淇敼Ipv4鍦板潃锛岀綉鍧€鍒嗛厤锛�192.168.100.1/24銆備綔涓鸿櫄鎷熷唴閮ㄧ綉缁渉ost鐨勫湴鍧�?</li>
+<li>鍦ㄤ富鏈�? windows 鍛戒护琛岀獥鍙ｈ緭鍏� ipconfig 灏卞彲浠ョ湅鍒� VirtualBox Host-Only Network: 鐨勭綉鍗�?</li>
 </ul>
-<p><img src="/Desktop/1.png" alt="网卡信息"></p>
-<h3 id="VirtualBox-创建Centos虚拟机"><a href="#VirtualBox-创建Centos虚拟机" class="headerlink" title="VirtualBox 创建Centos虚拟机"></a><strong>VirtualBox 创建Centos虚拟机</strong></h3><ol>
-<li>VirtualBox-&gt;新建，命名centos1</li>
-<li>进入设置</li>
+<p><img src="/Desktop/1.png" alt="缃戝崱淇℃伅"></p>
+<h3 id="VirtualBox-鍒涘缓Centos铏氭嫙鏈�"><a href="#VirtualBox-鍒涘缓Centos铏氭嫙鏈�" class="headerlink" title="VirtualBox 鍒涘缓Centos铏氭嫙鏈�?"></a><strong>VirtualBox 鍒涘缓Centos铏氭嫙鏈�?</strong></h3><ol>
+<li>VirtualBox-&gt;鏂板缓锛屽懡鍚峜entos1</li>
+<li>杩涘叆璁剧疆</li>
 </ol>
 <ul>
-<li>系统-&gt;处理器-&gt;虚拟机CPU、内存采用默认</li>
-<li>显示-&gt;显存默认36MB</li>
-<li>存储，设为30G。避免以后扩展难</li>
-<li>网络，第一块网卡必须是 NAT，不用更改；第二块网卡连接方式： Host-Only，接口就是前面创建的虚拟网卡</li>
-<li>存储-&gt;控制器-&gt;没有盘片，点击右侧光盘图案加载之前下载的iso文件。OK结束。</li>
+<li>绯荤�?-&gt;澶勭悊鍣�?-&gt;铏氭嫙鏈篊PU銆佸唴瀛橀噰鐢ㄩ粯璁�</li>
+<li>鏄剧�?-&gt;鏄惧瓨榛樿36MB</li>
+<li>瀛樺偍锛岃涓�30G銆傞伩鍏嶄互鍚庢墿灞曢毦</li>
+<li>缃戠粶锛岀涓€鍧楃綉鍗″繀椤绘�? NAT锛屼笉鐢ㄦ洿鏀癸紱绗簩鍧楃綉鍗¤繛鎺ユ柟寮忥細 Host-Only锛屾帴鍙ｅ氨鏄墠闈㈠垱寤虹殑铏氭嫙缃戝�?</li>
+<li>瀛樺�?-&gt;鎺у埗鍣�-&gt;娌℃湁鐩樼墖锛岀偣鍑诲彸渚у厜鐩樺浘妗堝姞杞戒箣鍓嶄笅杞界殑iso鏂囦欢銆侽K缁撴潫銆�?</li>
 </ul>
 <ol start="3">
-<li>启动安装</li>
+<li>鍚姩瀹夎�?</li>
 </ol>
 <ul>
-<li>点启动，系统进入安装状态。 </li>
-<li>安装过程中，光标键盘会被 VirtualBox 捕捉，按“右Ctrl”键释放 </li>
-<li>选语言“中文” </li>
-<li>配置“安装位置” -&gt;自动分区</li>
-<li>配置“网络与主机名” -&gt;示例中主机名设为centos1<ul>
-<li>点击以太网（enOs3）右侧开启，复制DNS</li>
-<li>点击以太网（enOs3）右侧开启,按“配置”，选 IPv4 设置，设置手动地址，例如：192.168.100.50,255.255.255.0,192.168.100.1。DNS可以配置第一块网卡DNS。完成。</li>
+<li>鐐瑰惎鍔紝绯荤粺杩涘叆瀹夎鐘舵€併€�? </li>
+<li>瀹夎杩囩▼涓紝鍏夋爣閿洏浼氳 VirtualBox 鎹曟崏锛屾寜鈥滃彸Ctrl鈥濋敭閲婃斁 </li>
+<li>閫夎瑷€鈥滀腑鏂団€�? </li>
+<li>閰嶇疆鈥滃畨瑁呬綅缃€�? -&gt;鑷姩鍒嗗尯</li>
+<li>閰嶇疆鈥滅綉缁滀笌涓绘満鍚嶁€� -&gt;绀轰緥涓富鏈哄悕璁句负centos1<ul>
+<li>鐐瑰嚮浠ュお缃戯紙enOs3锛夊彸渚у紑鍚紝澶嶅埗DNS</li>
+<li>鐐瑰嚮浠ュお缃戯紙enOs3锛夊彸渚у紑鍚�?,鎸夆€滈厤缃�?”锛岄€� IPv4 璁剧疆锛岃缃墜鍔ㄥ湴鍧€锛屼緥濡傦細192.168.100.50,255.255.255.0,192.168.100.1銆侱NS鍙互閰嶇疆绗竴鍧楃綉鍗NS銆傚畬鎴愩€�?</li>
 </ul>
 </li>
-<li>继续安装，设置root 用户密码，创建第一个用户的账号与密码。 等待安装完成，重启。</li>
-<li>检查网卡设置<ul>
-<li>输入nmtui命令，可选择编辑连接，激活网卡，更改主机名等操作。在activate界面手动激活网卡，因为这里默认开机时不会启动网卡。当然，也可以设置它开机时自动启动。找到网卡的配置文件（在/etc/sysconfig/network-scripts中），将ifcfg-enp0s8和ifcfg-enp0s3（名称对应你的网卡名称）中的ONBOOT选项都改为true，这样就能开机自启了。输su命令然后输入密码回到root(获取权限),使用 yum 安装vim,可参照： <a href="https://blog.csdn.net/u013233097/article/details/52355256" target="_blank" rel="noopener">Centos下安装vim</a></li>
-<li>nmcli可查看配置结果</li>
-<li>检查外网，例如： ping mail.163.com</li>
-<li>ping主机，检查内部网络，本文实例为：ping 192.168.100.1</li>
-<li>在Windows端，ping 192.168.100.50</li>
-<li>升级系统：yum update</li>
-<li>检查组安装包： yum grouplist</li>
-<li>退出并关闭虚拟机</li>
+<li>缁х画瀹夎锛岃缃畆oot 鐀��埛瀵嗙爜锛屽垱寤虹涓€涓敤鎴风殑璐﹀彿涓庡瘑鐮併€� 绛夊緟瀹夎瀹屾垚锛岄噸鍚€�</li>
+<li>妫€鏌ョ綉鍗¤缃�?<ul>
+<li>杈撳叆nmtui鍛戒护锛屽彲閫夋嫨缂栬緫杩炴帴锛屾縺娲荤綉鍗★紝鏇存敼涓绘満鍚嶇瓑鎿嶄綔銆傚湪activate鐣岄潰鎵嬪姩婵€娲荤綉鍗★紝鍥犱负杩欓噷榛樿寮€鏈烘椂涓嶄細鍚姩缃戝崱銆傚綋鐒讹紝涔熷彲浠ヨ缃畠寮€鏈烘椂鑷姩鍚姩銆傛壘鍒扮綉鍗＄殑閰嶇疆鏂囦欢锛堝�?/etc/sysconfig/network-scripts涓級锛屽皢ifcfg-enp0s8鍜宨fcfg-enp0s3锛堝悕绉板搴斾綘鐨勭綉鍗″悕绉帮級涓殑ONBOOT閫夐」閮芥敼涓簍rue锛岃繖鏍峰氨鑳藉紑鏈鸿嚜鍚簡銆傝緭su鍛戒护鐒跺悗杈撳叆瀵嗙爜鍥炲埌root(鑾峰彇鏉冮檺),浣跨�? yum 瀹夎vim,鍙弬鐓э�? <a href="https://blog.csdn.net/u013233097/article/details/52355256" target="_blank" rel="noopener">Centos涓嬪畨瑁卾im</a></li>
+<li>nmcli鍙煡鐪嬮厤缃粨鏋�?</li>
+<li>妫€鏌ュ缃戯紝渚嬪锛�? ping mail.163.com</li>
+<li>ping涓绘満锛屾鏌ュ唴閮ㄧ綉缁滐紝鏈枃瀹炰緥涓猴細ping 192.168.100.1</li>
+<li>鍦╓indows绔紝ping 192.168.100.50</li>
+<li>鍗囩骇绯荤粺锛歽um update</li>
+<li>妫€鏌ョ粍瀹夎鍖咃細 yum grouplist</li>
+<li>閫€鍑哄苟鍏抽棴铏氭嫙鏈�?</li>
 </ul>
 </li>
 </ul>
 <ol start="4">
-<li>复制虚拟机</li>
+<li>澶嶅埗铏氭嫙鏈�</li>
 </ol>
 <ul>
-<li>点击centos1选择复制，输入新虚拟机名称centos2,注意必须勾选选择重新初始化所有网卡的 MAC 地址。然后选择链接复制</li>
-<li>参照上文用nmtui 修改主机名和第二块网卡IP地址，这里设为192.168.100.100</li>
-<li>重启后在主机上，应能 ping 到这个地址</li>
+<li>鐐瑰嚮centos1閫夋嫨澶嶅埗锛岃緭鍏ユ柊铏氭嫙鏈哄悕绉癱entos2,娉ㄦ剰蹇呴』鍕鹃€夐€夋嫨閲嶆柊鍒濆鍖栨墍鏈夌綉鍗＄�? MAC 鍦板潃銆傜劧鍚庨€夋嫨閾炬帴澶嶅�?</li>
+<li>鍙傜収涓婃枃鐢╪mtui 淇敼涓绘満鍚嶅拰绗簩鍧楃綉鍗P鍦板潃锛岃繖閲岃涓�?192.168.100.100</li>
+<li>閲嶅惎鍚庡湪涓绘満涓婏紝搴旇兘 ping 鍒拌繖涓湴鍧€</li>
 </ul>
 <ol start="5">
-<li>安装centos桌面</li>
+<li>瀹夎centos妗岄�?</li>
 </ol>
 <ul>
-<li>重新配置虚拟机CPU, 内存， 显存（调高），示例中设置为2CPU，4G内存，64M显存。且启用3D加速。</li>
-<li>启动虚拟机用 yum groupinstall “GNOME Desktop”命令安装桌面。</li>
-<li>用 ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target 命令设置启动桌面。然后重启即可用桌面。</li>
+<li>閲嶆柊閰嶇疆铏氭嫙鏈篊PU, 鍐呭瓨锛�? 鏄惧瓨锛堣皟楂橈級锛岀ず渚嬩腑璁剧疆涓�?2CPU锛�4G鍐呭瓨锛�?64M鏄惧瓨銆備笖鍚�?3D鍔犻€熴€�</li>
+<li>鍚姩铏氭嫙鏈虹�? yum groupinstall “GNOME Desktop”鍛戒护瀹夎妗岄潰銆�</li>
+<li>鐢� ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target 鍛戒护璁剧疆鍚姩妗岄潰銆傜劧鍚庨噸鍚嵆鍙敤妗岄潰銆�?</li>
 </ul>
-<h3 id="配置用SSH访问虚拟机"><a href="#配置用SSH访问虚拟机" class="headerlink" title="配置用SSH访问虚拟机"></a><strong>配置用SSH访问虚拟机</strong></h3><ul>
-<li>可参考： <a href="https://blog.csdn.net/trackle400/article/details/52755571" target="_blank" rel="noopener">虚拟机下Centos开启ssh连接</a></li>
-<li>用 yum list installed | grep openssh-server 命令确认Centos7是否安装openssh-server,如果没安装，用yum install openssh-server 命令安装。</li>
-<li>用vim 打开/etc/ssh/sshdconfig, 将Port、ListenAddress前的＃号去除，并把PermitRootLogin(允许远程登陆)和PasswordAuthentication（使用用户密码作为连接验证）设为yes 。保存后退出</li>
-<li>重启后开启sshd服务，sudo service sshd start</li>
-<li>在Windows端启用Git bash测试连接 <ul>
-<li>输入命令 ssh <a href="mailto:root@192.168.100.100" target="_blank" rel="noopener">root@192.168.100.100</a>即可从Windows端登陆并进行操作</li>
+<h3 id="閰嶇疆鐢⊿SH璁块棶铏氭嫙鏈�"><a href="#閰嶇疆鐢⊿SH璁块棶铏氭嫙鏈�" class="headerlink" title="閰嶇疆鐢⊿SH璁块棶铏氭嫙鏈�"></a><strong>閰嶇疆鐢⊿SH璁块棶铏氭嫙鏈�</strong></h3><ul>
+<li>鍙弬鑰冿細 <a href="https://blog.csdn.net/trackle400/article/details/52755571" target="_blank" rel="noopener">铏氭嫙鏈轰笅Centos寮€鍚痵sh杩炴帴</a></li>
+<li>鐢� yum list installed | grep openssh-server 鍛戒护纭Centos7鏄惁瀹夎openssh-server,濡傛灉娌″畨瑁咃紝鐢▂um install openssh-server 鍛戒护瀹夎銆�?</li>
+<li>鐢╲im 鎵撳�?/etc/ssh/sshdconfig, 灏哖ort銆丩istenAddress鍓嶇殑锛冨彿鍘婚櫎锛屽苟鎶奝ermitRootLogin(鍏佽杩滅▼鐧婚�?)鍜孭asswordAuthentication锛堜娇鐢ㄧ敤鎴峰瘑鐮佷綔涓鸿繛鎺ラ獙璇侊級璁句负yes 銆備繚瀛樺悗閫€鍑�?</li>
+<li>閲嶅惎鍚庡紑鍚痵shd鏈嶅姟锛宻udo service sshd start</li>
+<li>鍦╓indows绔惎鐢℅it bash娴嬭瘯杩炴帴 <ul>
+<li>杈撳叆鍛戒护 ssh <a href="mailto:root@192.168.100.100" target="_blank" rel="noopener">root@192.168.100.100</a>鍗冲彲浠嶹indows绔櫥闄嗗苟杩涜鎿嶄綔</li>
 </ul>
 </li>
 </ul>
-<h3 id="配置用远程桌面访问虚拟机"><a href="#配置用远程桌面访问虚拟机" class="headerlink" title="配置用远程桌面访问虚拟机"></a><strong>配置用远程桌面访问虚拟机</strong></h3><ul>
-<li>可参照： <a href="https://www.jianshu.com/p/6f0f35fa2c4f" target="_blank" rel="noopener">如何设置VirtualBox虚拟机远程访问模式</a></li>
-<li>安装可以启用VirtualBox远程显示系统的扩展包: <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">Oracle VM VirtualBox Extension Pack下载</a></li>
-<li>关闭所有运行中的虚拟机（不能挂起）</li>
-<li>管理-&gt;全局设定-&gt;扩展-&gt;右侧Add Packet按钮选择下载的扩展包。</li>
-<li>安装完成后，重启宿主机。</li>
-<li>点击某一台虚拟机（示例中为centos2）,设置-&gt;显示-&gt;远程桌面，勾选启用服务器，并设置服务器端口，这里设置为192.168.100.1：5000。连接所使用的是宿主机的IP地址，而不是子机。每台子机的端口号要不同以避免冲突。</li>
-<li>先启动虚拟机，然后在Windows端启用远程桌面连接，输入宿主机IP:端口号，即192.168.100.1：5000。点击连接即可。</li>
+<h3 id="閰嶇疆鐢ㄨ繙绋嬫闈㈣闂櫄鎷熸満"><a href="#閰嶇疆鐢ㄨ繙绋嬫闈㈣闂櫄鎷熸満" class="headerlink" title="閰嶇疆鐢ㄨ繙绋嬫闈㈣闂櫄鎷熸満"></a><strong>閰嶇疆鐢ㄨ繙绋嬫闈㈣闂櫄鎷熸満</strong></h3><ul>
+<li>鍙弬鐓э�? [濡備綍璁剧疆VirtualBox铏氭嫙鏈鸿繙绋嬭闂ā寮�?(<a href="https://www.jianshu.com/p/6f0f35fa2c4f" target="_blank" rel="noopener">https://www.jianshu.com/p/6f0f35fa2c4f</a>)</li>
+<li>瀹夎鍙互鍚敤VirtualBox杩滅▼鏄剧ず绯荤粺鐨勬墿灞曞�?: <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">Oracle VM VirtualBox Extension Pack涓嬭浇</a></li>
+<li>鍏抽棴鎵€鏈夎繍琛屼腑鐨勮櫄鎷熸満锛堜笉鑳芥寕璧凤�?</li>
+<li>绠＄�?-&gt;鍏ㄥ眬璁惧畾-&gt;鎵╁�?-&gt;鍙充晶Add Packet鎸夐挳閫夋嫨涓嬭浇鐨勬墿灞曞寘銆�?</li>
+<li>瀹夎瀹屾垚鍚庯紝閲嶅惎瀹夸富鏈恒€�?</li>
+<li>鐐瑰嚮鏌愪竴鍙拌櫄鎷熸満锛堢ず渚嬩腑涓篶entos2锛�,璁剧�?-&gt;鏄剧�?-&gt;杩滅▼妗岄潰锛屽嬀閫夊惎鐢ㄦ湇鍔″櫒锛屽苟璁剧疆鏈嶅姟鍣ㄧ鍙ｏ紝杩欓噷璁剧疆涓�?192.168.100.1锛�5000銆傝繛鎺ユ墍浣跨敤鐨勬槸瀹夸富鏈虹殑IP鍦板潃锛岃€屼笉鏄瓙鏈恒€傛瘡鍙板瓙鏈虹殑绔彛鍙疯涓嶅悓浠ラ伩鍏嶅啿绐併€�?</li>
+<li>鍏堝惎鍔ㄨ櫄鎷熸満锛岀劧鍚庡湪Windows绔惎鐢ㄨ繙绋嬫闈㈣繛鎺ワ紝杈撳叆瀹夸富鏈篒P:绔彛鍙凤紝鍗�192.168.100.1锛�5000銆傜偣鍑昏繛鎺ュ嵆鍙€�?</li>
 </ul>
-<p>私有云完工！</p>
+<p>绉佹湁浜戝畬宸ワ�?</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Scott-Cai.github.io/2018/09/12/centos/" data-id="cjlxydxqs0000wgv1febgexex" class="article-share-link">Share</a>
+      <a data-url="https://Scott-Cai.github.io/2018/09/12/centos/" data-id="cjlygvfyp0002ekv150khrrmf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -192,6 +192,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/Scott-Cai.github.io/2018/09/12/VirtualBox-Centos/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Win10ʹ��VirtualBox�Centos˽����
+        
+      </div>
+    </a>
   
   
     <a href="/Scott-Cai.github.io/2018/09/11/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
@@ -231,6 +240,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/Scott-Cai.github.io/2018/09/12/VirtualBox-Centos/">Win10ʹ��VirtualBox�Centos˽����</a>
+          </li>
         
           <li>
             <a href="/Scott-Cai.github.io/2018/09/12/centos/">(no title)</a>
