@@ -229,6 +229,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/01/18/应用容器化/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott-Cai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-Cai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/18/应用容器化/" itemprop="url">应用容器化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-18T19:55:20+08:00">
+                2019-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Docker安装过程"><a href="#Docker安装过程" class="headerlink" title="Docker安装过程"></a>Docker安装过程</h2><h3 id="使用-APT-镜像源-安装"><a href="#使用-APT-镜像源-安装" class="headerlink" title="使用 APT 镜像源 安装"></a>使用 APT 镜像源 安装</h3><pre><code>由于官方源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line"></span><br><span class="line">$ sudo apt-get install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    software-properties-common</span><br></pre></td></tr></table></figure>
+
+
+鉴于国内网络问题，强烈建议使用国内源，官方源请在注释中查看。
+
+为了确认所下载软件包的合法性，需要添加软件源的 GPG 密钥。
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">	$ curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### 官方源</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span></span><br><span class="line"></span><br><span class="line">	然后，我们需要向 `source.list` 中添加 Docker 软件源</span><br><span class="line">	</span><br><span class="line">	```bash</span><br><span class="line">	$ sudo add-apt-repository \</span><br><span class="line">	    <span class="string">"deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \</span></span><br><span class="line"><span class="string">	    <span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">	    stable"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	更新 apt 软件包缓存，并安装 `docker-ce`：</span><br><span class="line">	</span><br><span class="line">	```bash</span><br><span class="line">	$ sudo apt-get update</span><br><span class="line">	</span><br><span class="line">	$ sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="启动-Docker-CE"><a href="#启动-Docker-CE" class="headerlink" title="启动 Docker CE"></a>启动 Docker CE</h3><pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl <span class="built_in">enable</span> docker</span><br><span class="line">$ sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+
+
+Ubuntu 14.04 请使用以下命令启动：
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service docker start</span><br></pre></td></tr></table></figure>
+</code></pre><h3 id="镜像下载和安装"><a href="#镜像下载和安装" class="headerlink" title="镜像下载和安装"></a>镜像下载和安装</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull github.com/Scott-Cai/github.com/Scott-Cai/web-server</span><br><span class="line">docker run -dit --name web-server -v $PATH<span class="emphasis">_TO_</span>SERVER_DATA:/data -p 8080:8080 github.com/Scott-Cai/github.com/Scott-Cai/web-server server</span><br><span class="line">docker run --rm --network host -v $PATH<span class="emphasis">_TO_</span>CLI_DATA:/data github.com/Scott-Cai/github.com/Scott-Cai/web-server cli help</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/01/18/web-server-docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -384,7 +519,7 @@ docker run --rm --network host -v $PATH_TO_CLI_DATA:/data github.com/Scott-Cai/g
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/27/Go/" itemprop="url">Centos下go语言开发环境搭建</a></h1>
+                <a class="post-title-link" href="/2018/09/27/Go/" itemprop="url">Centos涓媑o璇█寮€鍙戠幆澧冩惌寤�</a></h1>
         
 
         <div class="post-meta">
@@ -436,42 +571,42 @@ docker run --rm --network host -v $PATH_TO_CLI_DATA:/data github.com/Scott-Cai/g
       
         
           
-            <h2 id="1-安装golang"><a href="#1-安装golang" class="headerlink" title="1.安装golang"></a>1.安装golang</h2><h3 id="1-1-golang安装"><a href="#1-1-golang安装" class="headerlink" title="1.1 golang安装"></a>1.1 golang安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># sudo yum install golang</span><br></pre></td></tr></table></figure>
-<p>查看安装到哪个目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># rpm -ql golang |more</span><br></pre></td></tr></table></figure></p>
-<p>查看自己的go版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># go version</span><br></pre></td></tr></table></figure></p>
-<h3 id="1-2-设置环境变量"><a href="#1-2-设置环境变量" class="headerlink" title="1.2 设置环境变量"></a>1.2 设置环境变量</h3><p>go 对编译、包管理、测试、部署、运行提供全程支持。设置环境变量前应先了解一下go语言工作空间：</p>
-<p>Go代码必须放在工作空间内。它其实就是一个目录，其中包含三个子目录：</p>
+            <h2 id="1-瀹夎golang"><a href="#1-瀹夎golang" class="headerlink" title="1.瀹夎golang"></a>1.瀹夎golang</h2><h3 id="1-1-golang瀹夎"><a href="#1-1-golang瀹夎" class="headerlink" title="1.1 golang瀹夎"></a>1.1 golang瀹夎</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># sudo yum install golang</span><br></pre></td></tr></table></figure>
+<p>鏌ョ湅瀹夎鍒板摢涓洰褰曪細<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># rpm -ql golang |more</span><br></pre></td></tr></table></figure></p>
+<p>鏌ョ湅鑷繁鐨刧o鐗堟湰锛�<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># go version</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-2-璁剧疆鐜鍙橀噺"><a href="#1-2-璁剧疆鐜鍙橀噺" class="headerlink" title="1.2 璁剧疆鐜鍙橀噺"></a>1.2 璁剧疆鐜鍙橀噺</h3><p>go 瀵圭紪璇戙€佸寘绠＄悊銆佹祴璇曘€侀儴缃层€佽繍琛屾彁渚涘叏绋嬫敮鎸併€傝缃幆澧冨彉閲忓墠搴斿厛浜嗚В涓€涓媑o璇█宸ヤ綔绌洪棿锛�</p>
+<p>Go浠ｇ爜蹇呴』鏀惧湪宸ヤ綔绌洪棿鍐呫€傚畠鍏跺疄灏辨槸涓€涓洰褰曪紝鍏朵腑鍖呭惈涓変釜瀛愮洰褰曪細</p>
 <ul>
-<li>src 目录包含Go的源文件，它们被组织成包（每个目录都对应一个包），</li>
-<li>pkg 目录包含包对象，</li>
-<li>bin 目录包含可执行命令。</li>
+<li>src 鐩綍鍖呭惈Go鐨勬簮鏂囦欢锛屽畠浠缁勭粐鎴愬寘锛堟瘡涓洰褰曢兘瀵瑰簲涓€涓寘锛夛紝</li>
+<li>pkg 鐩綍鍖呭惈鍖呭璞★紝</li>
+<li>bin 鐩綍鍖呭惈鍙墽琛屽懡浠ゃ€�</li>
 </ul>
-<p>go 工具用于构建源码包，并将其生成的二进制文件安装到 pkg 和 bin 目录中；src 子目录通常包会含多种版本控制的代码仓库（例如Git或Mercurial）， 以此来跟踪一个或多个源码包的开发。</p>
-<p><strong>创建工作空间：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir $HOME/gowork</span><br></pre></td></tr></table></figure></p>
-<p><strong>配置环境变量：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile #打开profile文件，记得要有更改权限应用su命令回到root</span><br><span class="line">export GOPATH=$HOME/gowork</span><br><span class="line">export PATH=$PATH:$GOAPTH/bin  #将这两句添加到文件末尾</span><br></pre></td></tr></table></figure></p>
-<p>保存并退出（ESC, :wq）。</p>
-<p>执行配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
-<p><strong>检查配置</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env</span><br></pre></td></tr></table></figure></p>
-<p>结果GOPATH和GOROOT如下图则成功。</p>
-<p><img src="/2018/09/27/Go/1.png" alt="环境配置"></p>
-<h2 id="2-安装vscode编辑器"><a href="#2-安装vscode编辑器" class="headerlink" title="2. 安装vscode编辑器"></a>2. 安装vscode编辑器</h2><p>记得要用su命令回到root目录下。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc</span><br><span class="line"># sudo sh -c &apos;echo -e &quot;[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc&quot; &gt; /etc/yum.repos.d/vscode.repo&apos;</span><br><span class="line"># yum check-update	//检查更新</span><br><span class="line"># sudo yum install code</span><br></pre></td></tr></table></figure></p>
-<p>安装完毕后也可在 /usr/share/applications下找到Visual Studio Code拷贝到桌面，启动并信任laucher生成桌面图标。</p>
-<h2 id="3-安装必要的工具和插件"><a href="#3-安装必要的工具和插件" class="headerlink" title="3. 安装必要的工具和插件"></a>3. 安装必要的工具和插件</h2><h3 id="3-1-安装git"><a href="#3-1-安装git" class="headerlink" title="3.1 安装git"></a>3.1 安装git</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install git</span><br></pre></td></tr></table></figure>
-<p>安装后发现vscode提示版本太低，所以手动更新版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># yum install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm</span><br><span class="line"># yum install git</span><br><span class="line"># yum update git</span><br><span class="line"># git --version # check git version</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-2-工具包安装"><a href="#3-2-工具包安装" class="headerlink" title="3.2 工具包安装"></a>3.2 工具包安装</h3><p>根据vscode的提示一键安装，发现golang.org不能连上。只能手动安装。<br>在go工作空间gowork文件夹下创建golang.org文件夹，在其中再建立一个x文件夹，cd 命令切换到该目录下，然后下载插件包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># git clone https://github.com/golang/tools.git tools</span><br><span class="line"># git clone https://github.com/golang/lint.git lint</span><br></pre></td></tr></table></figure></p>
-<p>安装vscode中没有安装的工具包，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># go install golang.org/x/tools/cmd/guru</span><br><span class="line"># go install golang.org/x/tools/cmd/gorename</span><br><span class="line"># go install golang.org/x/tools/cmd/gorename</span><br><span class="line"># go install golang.org\x\lint\golint</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>成功后可以开始测试运行hello.go程序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    fmt.Printf(&quot;hello, world\n&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>本次实验中该测试文件放于工作空间gowork/src/github.com目录下，运行前应用cd命令先取到该位置。然后运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># go run hello.go</span><br></pre></td></tr></table></figure></p>
-<p><img src="/2018/09/27/Go/2.png" alt="测试运行hello.go"></p>
-<h2 id="4-绑定远程仓库"><a href="#4-绑定远程仓库" class="headerlink" title="4. 绑定远程仓库"></a>4. 绑定远程仓库</h2><ul>
-<li>绑定仓库的两种方法<ul>
-<li>远程新建再克隆<br>在github账号上新建一个repos， 然后clone 到本地 (在$GOPATH/src/github.com/github-user/目录下 clone，其中github-user替换成你的 github 账号，如我的账号为Scott-Cai)</li>
-<li>本地创建再链接<br>直接在本地创建好，然后绑定到远程仓库(使用git init，会在远程创建一个repos)。</li>
+<p>go 宸ュ叿鐢ㄤ簬鏋勫缓婧愮爜鍖咃紝骞跺皢鍏剁敓鎴愮殑浜岃繘鍒舵枃浠跺畨瑁呭埌 pkg 鍜� bin 鐩綍涓紱src 瀛愮洰褰曢€氬父鍖呬細鍚绉嶇増鏈帶鍒剁殑浠ｇ爜浠撳簱锛堜緥濡侴it鎴朚ercurial锛夛紝 浠ユ鏉ヨ窡韪竴涓垨澶氫釜婧愮爜鍖呯殑寮€鍙戙€�</p>
+<p><strong>鍒涘缓宸ヤ綔绌洪棿锛�</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir $HOME/gowork</span><br></pre></td></tr></table></figure></p>
+<p><strong>閰嶇疆鐜鍙橀噺锛�</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile #鎵撳紑profile鏂囦欢锛岃寰楄鏈夋洿鏀规潈闄愬簲鐢╯u鍛戒护鍥炲埌root</span><br><span class="line">export GOPATH=$HOME/gowork</span><br><span class="line">export PATH=$PATH:$GOAPTH/bin  #灏嗚繖涓ゅ彞娣诲姞鍒版枃浠舵湯灏�</span><br></pre></td></tr></table></figure></p>
+<p>淇濆瓨骞堕€€鍑猴紙ESC, :wq锛夈€�</p>
+<p>鎵ц閰嶇疆锛�<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p><strong>妫€鏌ラ厤缃�</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env</span><br></pre></td></tr></table></figure></p>
+<p>缁撴灉GOPATH鍜孏OROOT濡備笅鍥惧垯鎴愬姛銆�</p>
+<p><img src="/2018/09/27/Go/1.png" alt="鐜閰嶇疆"></p>
+<h2 id="2-瀹夎vscode缂栬緫鍣�"><a href="#2-瀹夎vscode缂栬緫鍣�" class="headerlink" title="2. 瀹夎vscode缂栬緫鍣�"></a>2. 瀹夎vscode缂栬緫鍣�</h2><p>璁板緱瑕佺敤su鍛戒护鍥炲埌root鐩綍涓嬨€�<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc</span><br><span class="line"># sudo sh -c &apos;echo -e &quot;[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc&quot; &gt; /etc/yum.repos.d/vscode.repo&apos;</span><br><span class="line"># yum check-update	//妫€鏌ユ洿鏂�</span><br><span class="line"># sudo yum install code</span><br></pre></td></tr></table></figure></p>
+<p>瀹夎瀹屾瘯鍚庝篃鍙湪 /usr/share/applications涓嬫壘鍒癡isual Studio Code鎷疯礉鍒版闈紝鍚姩骞朵俊浠籰aucher鐢熸垚妗岄潰鍥炬爣銆�</p>
+<h2 id="3-瀹夎蹇呰鐨勫伐鍏峰拰鎻掍欢"><a href="#3-瀹夎蹇呰鐨勫伐鍏峰拰鎻掍欢" class="headerlink" title="3. 瀹夎蹇呰鐨勫伐鍏峰拰鎻掍欢"></a>3. 瀹夎蹇呰鐨勫伐鍏峰拰鎻掍欢</h2><h3 id="3-1-瀹夎git"><a href="#3-1-瀹夎git" class="headerlink" title="3.1 瀹夎git"></a>3.1 瀹夎git</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install git</span><br></pre></td></tr></table></figure>
+<p>瀹夎鍚庡彂鐜皏scode鎻愮ず鐗堟湰澶綆锛屾墍浠ユ墜鍔ㄦ洿鏂扮増鏈�<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># yum install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm</span><br><span class="line"># yum install git</span><br><span class="line"># yum update git</span><br><span class="line"># git --version # check git version</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-2-宸ュ叿鍖呭畨瑁�"><a href="#3-2-宸ュ叿鍖呭畨瑁�" class="headerlink" title="3.2 宸ュ叿鍖呭畨瑁�"></a>3.2 宸ュ叿鍖呭畨瑁�</h3><p>鏍规嵁vscode鐨勬彁绀轰竴閿畨瑁咃紝鍙戠幇golang.org涓嶈兘杩炰笂銆傚彧鑳芥墜鍔ㄥ畨瑁呫€�<br>鍦╣o宸ヤ綔绌洪棿gowork鏂囦欢澶逛笅鍒涘缓golang.org鏂囦欢澶癸紝鍦ㄥ叾涓啀寤虹珛涓€涓獂鏂囦欢澶癸紝cd 鍛戒护鍒囨崲鍒拌鐩綍涓嬶紝鐒跺悗涓嬭浇鎻掍欢鍖�<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># git clone https://github.com/golang/tools.git tools</span><br><span class="line"># git clone https://github.com/golang/lint.git lint</span><br></pre></td></tr></table></figure></p>
+<p>瀹夎vscode涓病鏈夊畨瑁呯殑宸ュ叿鍖咃紝濡傦細<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># go install golang.org/x/tools/cmd/guru</span><br><span class="line"># go install golang.org/x/tools/cmd/gorename</span><br><span class="line"># go install golang.org/x/tools/cmd/gorename</span><br><span class="line"># go install golang.org\x\lint\golint</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>鎴愬姛鍚庡彲浠ュ紑濮嬫祴璇曡繍琛宧ello.go绋嬪簭銆�<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import &quot;fmt&quot;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    fmt.Printf(&quot;hello, world\n&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>鏈瀹為獙涓娴嬭瘯鏂囦欢鏀句簬宸ヤ綔绌洪棿gowork/src/github.com鐩綍涓嬶紝杩愯鍓嶅簲鐢╟d鍛戒护鍏堝彇鍒拌浣嶇疆銆傜劧鍚庤繍琛�<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># go run hello.go</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/09/27/Go/2.png" alt="娴嬭瘯杩愯hello.go"></p>
+<h2 id="4-缁戝畾杩滅▼浠撳簱"><a href="#4-缁戝畾杩滅▼浠撳簱" class="headerlink" title="4. 缁戝畾杩滅▼浠撳簱"></a>4. 缁戝畾杩滅▼浠撳簱</h2><ul>
+<li>缁戝畾浠撳簱鐨勪袱绉嶆柟娉�<ul>
+<li>杩滅▼鏂板缓鍐嶅厠闅�<br>鍦╣ithub璐﹀彿涓婃柊寤轰竴涓猺epos锛� 鐒跺悗clone 鍒版湰鍦� (鍦�$GOPATH/src/github.com/github-user/鐩綍涓� clone锛屽叾涓璯ithub-user鏇挎崲鎴愪綘鐨� github 璐﹀彿锛屽鎴戠殑璐﹀彿涓篠cott-Cai)</li>
+<li>鏈湴鍒涘缓鍐嶉摼鎺�<br>鐩存帴鍦ㄦ湰鍦板垱寤哄ソ锛岀劧鍚庣粦瀹氬埌杩滅▼浠撳簱(浣跨敤git init锛屼細鍦ㄨ繙绋嬪垱寤轰竴涓猺epos)銆�</li>
 </ul>
 </li>
 </ul>
-<p>本次实验在github.com文件夹下创建一个和你自己github账号名称一样的文件夹，然后在你的github账号上手动创建一个远程库，我建的是go，之后根据提示，在本地文件夹中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;# go&quot; &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git remote add origin https://github.com/Scott-Cai/go.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure></p>
-<p>按提示输入账号密码<br><img src="/2018/09/27/Go/3.png" alt="github"><br>之后即可通过add,commit,push等进行操作了，推荐看一下廖雪峰关于git的教程。<br><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">廖雪峰git教程</a></p>
+<p>鏈瀹為獙鍦╣ithub.com鏂囦欢澶逛笅鍒涘缓涓€涓拰浣犺嚜宸眊ithub璐﹀彿鍚嶇О涓€鏍风殑鏂囦欢澶癸紝鐒跺悗鍦ㄤ綘鐨刧ithub璐﹀彿涓婃墜鍔ㄥ垱寤轰竴涓繙绋嬪簱锛屾垜寤虹殑鏄痝o锛屼箣鍚庢牴鎹彁绀猴紝鍦ㄦ湰鍦版枃浠跺す涓細<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;# go&quot; &gt;&gt; README.md</span><br><span class="line">git init</span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;first commit&quot;</span><br><span class="line">git remote add origin https://github.com/Scott-Cai/go.git</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure></p>
+<p>鎸夋彁绀鸿緭鍏ヨ处鍙峰瘑鐮�<br><img src="/2018/09/27/Go/3.png" alt="github"><br>涔嬪悗鍗冲彲閫氳繃add,commit,push绛夎繘琛屾搷浣滀簡锛屾帹鑽愮湅涓€涓嬪粬闆嘲鍏充簬git鐨勬暀绋嬨€�<br><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="noopener">寤栭洩宄癵it鏁欑▼</a></p>
 
           
         
@@ -923,7 +1058,7 @@ docker run --rm --network host -v $PATH_TO_CLI_DATA:/data github.com/Scott-Cai/g
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
