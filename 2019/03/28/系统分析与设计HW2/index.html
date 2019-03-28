@@ -79,17 +79,20 @@
 
 
 
-<meta name="description" content="Docker安装过程使用 APT 镜像源 安装由于官方源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。  1234567$ sudo apt-get update$ sudo apt-get install \    apt-transport-https \    ca-certificates \    curl \">
+<meta name="description" content="简答题 用简短的语言给出对分析、设计的理解答：分析是指对问题与需求的调查研究，而不是解决方案。 设计是指出满足需求的概念层面的解决方案，而不是其实现。    用一句话描述面向对象的分析与设计的优势。答： 面对对象的分析与设计的优势在于：在分析问题和解决问题的两个过程中使用同一类建模标记，便于维护复用，简化了过程的复杂性。    简述 UML（统一建模语言）的作用。考试考哪些图？答：UML是用于可视">
 <meta property="og:type" content="article">
-<meta property="og:title" content="应用容器化">
-<meta property="og:url" content="https://Scott-Cai.github.io/2019/01/18/应用容器化/index.html">
+<meta property="og:title" content="系统分析与设计HW2">
+<meta property="og:url" content="https://Scott-Cai.github.io/2019/03/28/系统分析与设计HW2/index.html">
 <meta property="og:site_name" content="Scott-Cai">
-<meta property="og:description" content="Docker安装过程使用 APT 镜像源 安装由于官方源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。  1234567$ sudo apt-get update$ sudo apt-get install \    apt-transport-https \    ca-certificates \    curl \">
+<meta property="og:description" content="简答题 用简短的语言给出对分析、设计的理解答：分析是指对问题与需求的调查研究，而不是解决方案。 设计是指出满足需求的概念层面的解决方案，而不是其实现。    用一句话描述面向对象的分析与设计的优势。答： 面对对象的分析与设计的优势在于：在分析问题和解决问题的两个过程中使用同一类建模标记，便于维护复用，简化了过程的复杂性。    简述 UML（统一建模语言）的作用。考试考哪些图？答：UML是用于可视">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-18T11:55:20.471Z">
+<meta property="og:image" content="https://scott-cai.github.io/2019/03/28/系统分析与设计HW2/1.png">
+<meta property="og:image" content="https://scott-cai.github.io/2019/03/28/系统分析与设计HW2/2.png">
+<meta property="og:updated_time" content="2019-03-28T13:42:47.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="应用容器化">
-<meta name="twitter:description" content="Docker安装过程使用 APT 镜像源 安装由于官方源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。  1234567$ sudo apt-get update$ sudo apt-get install \    apt-transport-https \    ca-certificates \    curl \">
+<meta name="twitter:title" content="系统分析与设计HW2">
+<meta name="twitter:description" content="简答题 用简短的语言给出对分析、设计的理解答：分析是指对问题与需求的调查研究，而不是解决方案。 设计是指出满足需求的概念层面的解决方案，而不是其实现。    用一句话描述面向对象的分析与设计的优势。答： 面对对象的分析与设计的优势在于：在分析问题和解决问题的两个过程中使用同一类建模标记，便于维护复用，简化了过程的复杂性。    简述 UML（统一建模语言）的作用。考试考哪些图？答：UML是用于可视">
+<meta name="twitter:image" content="https://scott-cai.github.io/2019/03/28/系统分析与设计HW2/1.png">
 
 
 
@@ -119,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://Scott-Cai.github.io/2019/01/18/应用容器化/"/>
+  <link rel="canonical" href="https://Scott-Cai.github.io/2019/03/28/系统分析与设计HW2/"/>
 
 
 
 
 
-  <title>应用容器化 | Scott-Cai</title>
+  <title>系统分析与设计HW2 | Scott-Cai</title>
   
 
 
@@ -232,7 +235,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/01/18/应用容器化/">
+    <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/03/28/系统分析与设计HW2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Scott-Cai">
@@ -249,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">应用容器化</h1>
+          <h1 class="post-title" itemprop="name headline">系统分析与设计HW2</h1>
         
 
         <div class="post-meta">
@@ -261,8 +264,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-18T19:55:20+08:00">
-                2019-01-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-28T20:52:06+08:00">
+                2019-03-28
               </time>
             
 
@@ -304,23 +307,69 @@
       
 
       
-        <h2 id="Docker安装过程"><a href="#Docker安装过程" class="headerlink" title="Docker安装过程"></a>Docker安装过程</h2><h3 id="使用-APT-镜像源-安装"><a href="#使用-APT-镜像源-安装" class="headerlink" title="使用 APT 镜像源 安装"></a>使用 APT 镜像源 安装</h3><pre><code>由于官方源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。
+        <h4 id="简答题"><a href="#简答题" class="headerlink" title="简答题"></a>简答题</h4><ul>
+<li><h5 id="用简短的语言给出对分析、设计的理解"><a href="#用简短的语言给出对分析、设计的理解" class="headerlink" title="用简短的语言给出对分析、设计的理解"></a>用简短的语言给出对分析、设计的理解</h5><p>答：分析是指对问题与需求的调查研究，而不是解决方案。</p>
+<p>设计是指出满足需求的概念层面的解决方案，而不是其实现。</p>
+</li>
+</ul>
+<ul>
+<li><h5 id="用一句话描述面向对象的分析与设计的优势。"><a href="#用一句话描述面向对象的分析与设计的优势。" class="headerlink" title="用一句话描述面向对象的分析与设计的优势。"></a>用一句话描述面向对象的分析与设计的优势。</h5><p>答： 面对对象的分析与设计的优势在于：在分析问题和解决问题的两个过程中使用同一类建模标记，便于维护复用，简化了过程的复杂性。</p>
+</li>
+</ul>
+<ul>
+<li><h5 id="简述-UML（统一建模语言）的作用。考试考哪些图？"><a href="#简述-UML（统一建模语言）的作用。考试考哪些图？" class="headerlink" title="简述 UML（统一建模语言）的作用。考试考哪些图？"></a>简述 UML（统一建模语言）的作用。考试考哪些图？</h5><p>答：UML是用于可视化分析和设计的结果的标准图表语言。</p>
+<p>考试考的图：</p>
+<ul>
+<li><p>用例图：用户角度：功能、执行者</p>
+</li>
+<li><p>静态图：系统静态结构</p>
+<ul>
+<li>类图：概念及关系</li>
+<li>对象图：某种状态或时间段内，系统中活跃的对象及其关系</li>
+<li>包图：描述系统的分解结构</li>
+</ul>
+</li>
+<li><p>行为图：系统的动态行为</p>
+<ul>
+<li>交互图：描述对象间的消息传递<ul>
+<li>顺序图：强调对象间消息发送的时序</li>
+<li>合作图：强调对象间的动态写作关系</li>
+</ul>
+</li>
+<li>状态图：对象的动态行为。状态 - 事件 - 状态迁移 - 响应动作</li>
+<li>活动图：描述系统为完成某功能而执行的操作序列</li>
+</ul>
+</li>
+<li><p>实现图：描述系统的组成和分布状况</p>
+<ul>
+<li><p>构件图：组成部件及其关系</p>
+</li>
+<li><p>部署图：物理体系结构及与软件单元的对应关系</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h5 id="从软件本质的角度，解释软件范围（需求）控制的可行性"><a href="#从软件本质的角度，解释软件范围（需求）控制的可行性" class="headerlink" title="从软件本质的角度，解释软件范围（需求）控制的可行性"></a>从软件本质的角度，解释软件范围（需求）控制的可行性</h5><p>答：软件本质：复杂性、一致性、可变性、不可视性。</p>
+<p>由于软件本身的复杂性、不可见性、不一致性、可变性，软件范围多数情况下对于客户和开发者都是模糊的，这形成软件产品与其他产品不同的开发过程。因此，范围管理是软件项目管理的重中之重！在多数情况下，客户与开发者能就项目的 20% 内容给出严格的需求约定，80% 的内容都是相对模糊的。因此，围绕客户目标，发现并满足客户感兴趣的内容是最关键的。即可采用2/8原则进行软件范围控制。换言之，软件范围控制是可行的。</p>
+</li>
+</ul>
+<h4 id="项目管理实践"><a href="#项目管理实践" class="headerlink" title="项目管理实践"></a>项目管理实践</h4><ul>
+<li><p>看板使用练习</p>
+<p> <img src="/2019/03/28/系统分析与设计HW2/1.png" alt="kanban"></p>
+</li>
+</ul>
+<ul>
+<li><p>UML绘图工具练习(教材P184 图16-5)</p>
+<p> <img src="/2019/03/28/系统分析与设计HW2/2.png" alt="类图"></p>
+</li>
+</ul>
+<p>​     </p>
+<p>​    </p>
+<p>​    </p>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line"></span><br><span class="line">$ sudo apt-get install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    software-properties-common</span><br></pre></td></tr></table></figure>
-
-
-鉴于国内网络问题，强烈建议使用国内源，官方源请在注释中查看。
-
-为了确认所下载软件包的合法性，需要添加软件源的 GPG 密钥。
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">	$ curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### 官方源</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span></span><br><span class="line"></span><br><span class="line">	然后，我们需要向 `source.list` 中添加 Docker 软件源</span><br><span class="line">	</span><br><span class="line">	```bash</span><br><span class="line">	$ sudo add-apt-repository \</span><br><span class="line">	    <span class="string">"deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \</span></span><br><span class="line"><span class="string">	    <span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">	    stable"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	更新 apt 软件包缓存，并安装 `docker-ce`：</span><br><span class="line">	</span><br><span class="line">	```bash</span><br><span class="line">	$ sudo apt-get update</span><br><span class="line">	</span><br><span class="line">	$ sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure>
-</code></pre><h3 id="启动-Docker-CE"><a href="#启动-Docker-CE" class="headerlink" title="启动 Docker CE"></a>启动 Docker CE</h3><pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl <span class="built_in">enable</span> docker</span><br><span class="line">$ sudo systemctl start docker</span><br></pre></td></tr></table></figure>
-
-
-Ubuntu 14.04 请使用以下命令启动：
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service docker start</span><br></pre></td></tr></table></figure>
-</code></pre><h3 id="镜像下载和安装"><a href="#镜像下载和安装" class="headerlink" title="镜像下载和安装"></a>镜像下载和安装</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull github.com/Scott-Cai/github.com/Scott-Cai/web-server</span><br><span class="line">docker run -dit --name web-server -v $PATH<span class="emphasis">_TO_</span>SERVER_DATA:/data -p 8080:8080 github.com/Scott-Cai/github.com/Scott-Cai/web-server server</span><br><span class="line">docker run --rm --network host -v $PATH<span class="emphasis">_TO_</span>CLI_DATA:/data github.com/Scott-Cai/github.com/Scott-Cai/web-server cli help</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -344,8 +393,8 @@ Ubuntu 14.04 请使用以下命令启动：
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/12/VirtualBox-Centos/" rel="next" title="Win10使用VirtualBox搭建Centos私有云">
-                <i class="fa fa-chevron-left"></i> Win10使用VirtualBox搭建Centos私有云
+              <a href="/2019/03/14/系统分析与设计第一次作业/" rel="next" title="系统分析与设计第一次作业">
+                <i class="fa fa-chevron-left"></i> 系统分析与设计第一次作业
               </a>
             
           </div>
@@ -353,10 +402,6 @@ Ubuntu 14.04 请使用以下命令启动：
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/14/系统分析与设计第一次作业/" rel="prev" title="系统分析与设计第一次作业">
-                系统分析与设计第一次作业 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,7 +520,7 @@ Ubuntu 14.04 请使用以下命令启动：
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker安装过程"><span class="nav-number">1.</span> <span class="nav-text">Docker安装过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-APT-镜像源-安装"><span class="nav-number">1.1.</span> <span class="nav-text">使用 APT 镜像源 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-Docker-CE"><span class="nav-number">1.2.</span> <span class="nav-text">启动 Docker CE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像下载和安装"><span class="nav-number">1.3.</span> <span class="nav-text">镜像下载和安装</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简答题"><span class="nav-number">1.</span> <span class="nav-text">简答题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#用简短的语言给出对分析、设计的理解"><span class="nav-number">1.1.</span> <span class="nav-text">用简短的语言给出对分析、设计的理解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用一句话描述面向对象的分析与设计的优势。"><span class="nav-number">1.2.</span> <span class="nav-text">用一句话描述面向对象的分析与设计的优势。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简述-UML（统一建模语言）的作用。考试考哪些图？"><span class="nav-number">1.3.</span> <span class="nav-text">简述 UML（统一建模语言）的作用。考试考哪些图？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从软件本质的角度，解释软件范围（需求）控制的可行性"><span class="nav-number">1.4.</span> <span class="nav-text">从软件本质的角度，解释软件范围（需求）控制的可行性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#项目管理实践"><span class="nav-number">2.</span> <span class="nav-text">项目管理实践</span></a></li></ol></div>
             
 
           </div>
