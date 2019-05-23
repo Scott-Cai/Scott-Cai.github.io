@@ -88,7 +88,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://scott-cai.github.io/2019/05/22/系统分析与设计HW6/1.png">
 <meta property="og:image" content="https://scott-cai.github.io/2019/05/22/系统分析与设计HW6/2.png">
-<meta property="og:updated_time" content="2019-05-23T04:20:04.716Z">
+<meta property="og:updated_time" content="2019-05-23T04:29:14.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="系统分析与设计HW6">
 <meta name="twitter:description" content="一、简答题1. 用例的概念 用例是描述参与者使用一个系统支持一个目标相关的成功和失败场景的集合。  是文本而非图 用例建模主要是写文本的行为，而非画图 用例与面向对象毫不相关 用例是经典OOA/D的关键需求输入 功能性或者行为性的需求表现系统要做的事情。  2.用例和场景的关系？什么是主场景或 happy path？ 场景  场景是参与者与系统之间具体的行动和交互（会话）序列，也称为用例实例。 它">
@@ -407,19 +407,127 @@
 </ol>
 </li>
 </ul>
-<pre><code>|  ID  |   name   |  Imp  |  Est  |  How to demo  |  Notes  |
-|----- | -------- | ----- | ----- | ------------- | ------- |
-|  1   |  旅馆查询 |  30   |  4    |通过GPS或者用户自行选择位置，利用地图或者列表信息进行一定范围内酒店信息查询           | 通过GPS的API进行用户位置的定位 |
-|  2   |  旅馆选择 |  80   |  8    | 用户可以利用酒店的房间数、房间大小、酒店评价等信息进行酒店的选定 | 注意酒店信息的实时更新，特别是房间数量的实时更新 |
-|  3   |  房间预定 |  80   |  8    | 选定酒店后需要进行房间的预定，用户输入入住者的身份证号码、是否需要保险、手机号码等必要信息后创建订单 | 需要进行用户身份信息的核验，避免通过虚假信息预定房间 |
-|  4   |  订单管理 |  70   |  6    | 用户在创建订单后可以对订单信息进行修改，比如取消订单，修改入住天数以及添加备注等 | 特价房间不能取消订单，只能提示用户通过保险公司理赔 |
-|  5   |  费用支付 |  60   |  3    | 特价房间不能取消订单，只能提示用户通过保险公司理赔 | 可以通过微信、支付宝、银联进行订单支付 |
-|  6   |  账户管理 |  40   |  4    | 用户进行头像、昵称、身份信息、预留手机等个人信息的修改 | 需要核验昵称或图片是否含有非法信息 |
-</code></pre><ol start="5">
-<li><p>根据任务4，参考 <a href="https://www.ibm.com/developerworks/cn/rational/edge/09/mar09/collaris_dekker/index.html" target="_blank" rel="noopener">使用用例点估算软件成本</a>，给出项目用例点的估算</p>
-<p>|  用例  |   事物   |  计算  |  原因  |  UC权重  |<br>|—— | ——– | —– | —— | ——–|<br>| 旅馆查询 | 3 | 3 | 利用已知的酒店信息进行排序，或者用户输入关键词进行模糊查询 | 简单 |<br>| 旅馆选择 | 6 | 5 | 提供酒店客房数量、客房类型、是否含有早餐等信息，需要及时更新客房信息 | 平均 |<br>| 房间预定 | 3 | 2 | 进行用户信息录入，创建订单 | 简单 |<br>| 订单管理 | 5 | 3 | 用户修改订单信息或取消订单 | 简单 |<br>| 费用支付 | 1 | 1 | 用户支付订单费用，调用API即可 | 简单 |<br>| 账户管理 | 4 | 1 | 用户修改个人信息 | 简单 |</p>
-</li>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>name</th>
+<th>Imp</th>
+<th>Est</th>
+<th>How to demo</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>旅馆查询</td>
+<td>30</td>
+<td>4</td>
+<td>通过GPS或者用户自行选择位置，利用地图或者列表信息进行一定范围内酒店信息查询</td>
+<td>通过GPS的API进行用户位置的定位</td>
+</tr>
+<tr>
+<td>2</td>
+<td>旅馆选择</td>
+<td>80</td>
+<td>8</td>
+<td>用户可以利用酒店的房间数、房间大小、酒店评价等信息进行酒店的选定</td>
+<td>注意酒店信息的实时更新，特别是房间数量的实时更新</td>
+</tr>
+<tr>
+<td>3</td>
+<td>房间预定</td>
+<td>80</td>
+<td>8</td>
+<td>选定酒店后需要进行房间的预定，用户输入入住者的身份证号码、是否需要保险、手机号码等必要信息后创建订单</td>
+<td>需要进行用户身份信息的核验，避免通过虚假信息预定房间</td>
+</tr>
+<tr>
+<td>4</td>
+<td>订单管理</td>
+<td>70</td>
+<td>6</td>
+<td>用户在创建订单后可以对订单信息进行修改，比如取消订单，修改入住天数以及添加备注等</td>
+<td>特价房间不能取消订单，只能提示用户通过保险公司理赔</td>
+</tr>
+<tr>
+<td>5</td>
+<td>费用支付</td>
+<td>60</td>
+<td>3</td>
+<td>特价房间不能取消订单，只能提示用户通过保险公司理赔</td>
+<td>可以通过微信、支付宝、银联进行订单支付</td>
+</tr>
+<tr>
+<td>6</td>
+<td>账户管理</td>
+<td>40</td>
+<td>4</td>
+<td>用户进行头像、昵称、身份信息、预留手机等个人信息的修改</td>
+<td>需要核验昵称或图片是否含有非法信息</td>
+</tr>
+</tbody>
+</table>
+<p>​     </p>
+<ol start="5">
+<li>根据任务4，参考 <a href="https://www.ibm.com/developerworks/cn/rational/edge/09/mar09/collaris_dekker/index.html" target="_blank" rel="noopener">使用用例点估算软件成本</a>，给出项目用例点的估算</li>
 </ol>
+<table>
+<thead>
+<tr>
+<th>用例</th>
+<th>事物</th>
+<th>计算</th>
+<th>原因</th>
+<th>UC权重</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>旅馆查询</td>
+<td>3</td>
+<td>3</td>
+<td>利用已知的酒店信息进行排序，或者用户输入关键词进行模糊查询</td>
+<td>简单</td>
+</tr>
+<tr>
+<td>旅馆选择</td>
+<td>6</td>
+<td>5</td>
+<td>提供酒店客房数量、客房类型、是否含有早餐等信息，需要及时更新客房信息</td>
+<td>平均</td>
+</tr>
+<tr>
+<td>房间预定</td>
+<td>3</td>
+<td>2</td>
+<td>进行用户信息录入，创建订单</td>
+<td>简单</td>
+</tr>
+<tr>
+<td>订单管理</td>
+<td>5</td>
+<td>3</td>
+<td>用户修改订单信息或取消订单</td>
+<td>简单</td>
+</tr>
+<tr>
+<td>费用支付</td>
+<td>1</td>
+<td>1</td>
+<td>用户支付订单费用，调用API即可</td>
+<td>简单</td>
+</tr>
+<tr>
+<td>账户管理</td>
+<td>4</td>
+<td>1</td>
+<td>用户修改个人信息</td>
+<td>简单</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
