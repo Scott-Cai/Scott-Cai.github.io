@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、简答题1. 用例的概念 用例是描述参与者使用一个系统支持一个目标相关的成功和失败场景的集合。  是文本而非图 用例建模主要是写文本的行为，而非画图 用例与面向对象毫不相关 用例是经典OOA/D的关键需求输入 功能性或者行为性的需求表现系统要做的事情。  2.用例和场景的关系？什么是主场景或 happy path？ 场景  场景是参与者与系统之间具体的行动和交互（会话）序列，也称为用例实例。 它">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统分析与设计HW6">
+<meta property="og:url" content="https://Scott-Cai.github.io/2019/05/22/系统分析与设计HW6/index.html">
+<meta property="og:site_name" content="Scott-Cai">
+<meta property="og:description" content="一、简答题1. 用例的概念 用例是描述参与者使用一个系统支持一个目标相关的成功和失败场景的集合。  是文本而非图 用例建模主要是写文本的行为，而非画图 用例与面向对象毫不相关 用例是经典OOA/D的关键需求输入 功能性或者行为性的需求表现系统要做的事情。  2.用例和场景的关系？什么是主场景或 happy path？ 场景  场景是参与者与系统之间具体的行动和交互（会话）序列，也称为用例实例。 它">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://scott-cai.github.io/2019/05/22/系统分析与设计HW6/1.png">
+<meta property="og:image" content="https://scott-cai.github.io/2019/05/22/系统分析与设计HW6/2.png">
+<meta property="og:updated_time" content="2019-05-23T04:10:22.424Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="系统分析与设计HW6">
+<meta name="twitter:description" content="一、简答题1. 用例的概念 用例是描述参与者使用一个系统支持一个目标相关的成功和失败场景的集合。  是文本而非图 用例建模主要是写文本的行为，而非画图 用例与面向对象毫不相关 用例是经典OOA/D的关键需求输入 功能性或者行为性的需求表现系统要做的事情。  2.用例和场景的关系？什么是主场景或 happy path？ 场景  场景是参与者与系统之间具体的行动和交互（会话）序列，也称为用例实例。 它">
+<meta name="twitter:image" content="https://scott-cai.github.io/2019/05/22/系统分析与设计HW6/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://Scott-Cai.github.io/2019/05/22/系统分析与设计HW6/"/>
+
+
+
+
+
+  <title>系统分析与设计HW6 | Scott-Cai</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott-Cai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/05/22/系统分析与设计HW6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott-Cai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-Cai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">系统分析与设计HW6</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-22T11:21:33+08:00">
+                2019-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="一、简答题"><a href="#一、简答题" class="headerlink" title="一、简答题"></a>一、简答题</h5><p><strong>1. 用例的概念</strong></p>
+<p>用例是描述参与者使用一个系统支持一个目标相关的成功和失败场景的集合。</p>
+<ul>
+<li>是文本而非图</li>
+<li>用例建模主要是写文本的行为，而非画图</li>
+<li>用例与面向对象毫不相关</li>
+<li>用例是经典OOA/D的关键需求输入</li>
+<li>功能性或者行为性的需求表现系统要做的事情。</li>
+</ul>
+<p><strong>2.用例和场景的关系？什么是主场景或 happy path？</strong></p>
+<p><strong>场景</strong></p>
+<ul>
+<li>场景是参与者与系统之间具体的行动和交互（会话）序列，也称为用例实例。</li>
+<li>它是关于使用系统的一个具体故事，或者是贯穿用例的一条路径。</li>
+</ul>
+<p><strong>主场景或happy path</strong></p>
+<ul>
+<li>主场景相当于主要的系统交互，即成功场景</li>
+</ul>
+<h5 id="3-用例有哪些形式？"><a href="#3-用例有哪些形式？" class="headerlink" title="3.用例有哪些形式？"></a>3.用例有哪些形式？</h5><ul>
+<li>Brief(high level)<ul>
+<li>一段简介，通常是主要的成功场景</li>
+<li>在早期的需求分析中，获得对于主体和范围的快速认识</li>
+</ul>
+</li>
+<li>Casual（简便格式）<ul>
+<li>非正式的段落形式，使用多个段落包含多个场景</li>
+</ul>
+</li>
+<li>Fully<ul>
+<li>所有的步骤和变化都详细写明，有支持的部分，比如前提和成功场景的保证</li>
+</ul>
+</li>
+</ul>
+<h5 id="4-对于复杂业务，为什么编制完整用例非常难？"><a href="#4-对于复杂业务，为什么编制完整用例非常难？" class="headerlink" title="4.对于复杂业务，为什么编制完整用例非常难？"></a>4.对于复杂业务，为什么编制完整用例非常难？</h5><ul>
+<li>对于复杂的业务，很难将所有的目标、故事、使用场景遵循一定的顺序列举出来。如果场景不够全面，那么用例的完整性就难以保障。</li>
+<li>此外，用例建模虽然给出了一套可操作的步骤，但是具体如何操作以及如何书写依赖于用例的书写者。因而用例本身并不能够控制自身的完整性。</li>
+</ul>
+<h5 id="5-什么是用例图"><a href="#5-什么是用例图" class="headerlink" title="5. 什么是用例图"></a>5. 什么是用例图</h5><p>用例图（User Case）由参与者（Actor）、用例（Use Case），边界以及它们之间的关系构成的用于描述系统功能的视图。用例图同时也是参与者（外部用户）所能观察到的系统功能的模型图。用例图是系统的蓝图</p>
+<h5 id="6-用例图的基本符号与元素"><a href="#6-用例图的基本符号与元素" class="headerlink" title="6. 用例图的基本符号与元素"></a>6. 用例图的基本符号与元素</h5><ul>
+<li>椭圆：表示每个用例</li>
+<li>矩形框：表示整个系统</li>
+<li>小人：表示参与者（actor）</li>
+<li>箭头：各用例之间的关系,如include和extend,Inheritance</li>
+</ul>
+<h5 id="7-用例图的画法和步骤"><a href="#7-用例图的画法和步骤" class="headerlink" title="7.用例图的画法和步骤"></a>7.用例图的画法和步骤</h5><ul>
+<li>创建新的用例图</li>
+<li>绘制用例图<ul>
+<li>绘制“子系统”边界<ul>
+<li>重命名“子系统”</li>
+</ul>
+</li>
+<li>绘制参与者（放在所有系统边界之外）<ul>
+<li>重命名参与者</li>
+</ul>
+</li>
+<li>绘制用例<ul>
+<li>使用参与者自身能够理解的名称重命名用例，不要使用与代码有关的名称</li>
+<li>从主要的事务开始，直到后面较小的交互为止</li>
+<li>将每个用例放入支持它的系统或主要子系统（忽略只与用户有关的外观或组件）</li>
+<li>可以在系统边界外绘制用例，表明系统不支持该用例</li>
+</ul>
+</li>
+<li>将参与者与用例相连</li>
+<li>使用“包括”、“扩展”和“泛化”关系结构化用例</li>
+</ul>
+</li>
+</ul>
+<h5 id="8-用例图给利益相关人与开发者的价值有哪些？"><a href="#8-用例图给利益相关人与开发者的价值有哪些？" class="headerlink" title="8.用例图给利益相关人与开发者的价值有哪些？"></a>8.用例图给利益相关人与开发者的价值有哪些？</h5><ul>
+<li>利益相关人：提供了系统使用和行为的摘要视图，保证系统能够按照用户的需求进行设计，使得系统能够注重其参与者的用户体验。</li>
+<li>开发者：更明确客户的需求，使得开发者能够更好理解客户需求,明确系统的范围以及其提供功能的情况、与外部系统之间的关系，便于开发者进行系统的实现。</li>
+</ul>
+<h5 id="二、建模练习题（用例模型）"><a href="#二、建模练习题（用例模型）" class="headerlink" title="二、建模练习题（用例模型）"></a>二、建模练习题（用例模型）</h5><ul>
+<li><p>选择2-3个你熟悉的类似业务的在线服务系统（或移动 APP），如定旅馆（携程、去哪儿等）、定电影票、背单词APP等，分别绘制它们用例图。并满足以下要求：</p>
+<ul>
+<li>请使用用户的视角，描述用户目标或系统提供的服务</li>
+<li>粒度达到子用例级别，并用 include 和 exclude 关联它们</li>
+<li>请用色彩标注出你认为创新（区别于竞争对手的）用例或子用例</li>
+<li>尽可能识别外部系统和服务</li>
+</ul>
+<p>选择猫眼和淘票票提供的购买电影票服务。</p>
+</li>
+</ul>
+<p>猫眼：<img src="/2019/05/22/系统分析与设计HW6/1.png" alt="猫眼用例图"><br>淘票票：<img src="/2019/05/22/系统分析与设计HW6/2.png" alt="淘票票用例图"></p>
+<ul>
+<li><p>然后，回答下列问题：</p>
+<ol>
+<li><p>为什么相似系统的用例图是相似的？</p>
+<p>答：因为用例图由参与者、用例，边界以及它们之间的关系构成的用于描述系统功能的视图。如果系统是相似的，在相似的最终目标下，系统的参与者、用例、边界以及它们之间的关系构成也是相似的，最终画出来的用例图是相似的</p>
+</li>
+<li><p>如果是定旅馆业务，请对比 Asg_RH 用例图，简述如何利用不同时代、不同地区产品的用例图，展现、突出创新业务和技术</p>
+</li>
+<li><p>如何利用用例图定位创新思路（业务创新、或技术创新、或商业模式创新）在系统中的作用</p>
+<p>答：通过在用例图中使用与其他用例不同的颜色进行标记的方法，能够使得开发者快速定位到该用例图中的创新点。对比相似系统可以得出创新思路提供了哪些更优质的服务。</p>
+</li>
+<li><p>请使用 SCRUM 方法，选择一个用例图，编制某定旅馆开发的需求（backlog）开发计划表</p>
+<p>答：<br>|  ID  |   name   |  Imp  |  Est  |  How to demo  |  Notes  |<br>|—– | ——– | —– | —– | ————- | ——- |<br>|  1   |  旅馆查询 |  30   |  4    |通过GPS或者用户自行选择位置，利用地图或者列表信息进行一定范围内酒店信息查询           | 通过GPS的API进行用户位置的定位 |<br>|  2   |  旅馆选择 |  80   |  8    | 用户可以利用酒店的房间数、房间大小、酒店评价等信息进行酒店的选定 | 注意酒店信息的实时更新，特别是房间数量的实时更新 |<br>|  3   |  房间预定 |  80   |  8    | 选定酒店后需要进行房间的预定，用户输入入住者的身份证号码、是否需要保险、手机号码等必要信息后创建订单 | 需要进行用户身份信息的核验，避免通过虚假信息预定房间 |<br>|  4   |  订单管理 |  70   |  6    | 用户在创建订单后可以对订单信息进行修改，比如取消订单，修改入住天数以及添加备注等 | 特价房间不能取消订单，只能提示用户通过保险公司理赔 |<br>|  5   |  费用支付 |  60   |  3    | 特价房间不能取消订单，只能提示用户通过保险公司理赔 | 可以通过微信、支付宝、银联进行订单支付 |<br>|  6   |  账户管理 |  40   |  4    | 用户进行头像、昵称、身份信息、预留手机等个人信息的修改 | 需要核验昵称或图片是否含有非法信息 |</p>
+</li>
+</ol>
+</li>
+</ul>
+<ol start="5">
+<li>根据任务4，参考 <a href="https://www.ibm.com/developerworks/cn/rational/edge/09/mar09/collaris_dekker/index.html" target="_blank" rel="noopener">使用用例点估算软件成本</a>，给出项目用例点的估算<br>|  用例  |   事物   |  计算  |  原因  |  UC权重  |<br>|—— | ——– | —– | —— | ——–|<br>| 旅馆查询 | 3 | 3 | 利用已知的酒店信息进行排序，或者用户输入关键词进行模糊查询 | 简单 |<br>| 旅馆选择 | 6 | 5 | 提供酒店客房数量、客房类型、是否含有早餐等信息，需要及时更新客房信息 | 平均 |<br>| 房间预定 | 3 | 2 | 进行用户信息录入，创建订单 | 简单 |<br>| 订单管理 | 5 | 3 | 用户修改订单信息或取消订单 | 简单 |<br>| 费用支付 | 1 | 1 | 用户支付订单费用，调用API即可 | 简单 |<br>| 账户管理 | 4 | 1 | 用户修改个人信息 | 简单 |</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/14/系统分析与设计第三次作业/" rel="next" title="系统分析与设计第三次作业">
+                <i class="fa fa-chevron-left"></i> 系统分析与设计第三次作业
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="[object Object]"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Scott-Cai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、简答题"><span class="nav-number">1.</span> <span class="nav-text">一、简答题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-用例有哪些形式？"><span class="nav-number">2.</span> <span class="nav-text">3.用例有哪些形式？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-对于复杂业务，为什么编制完整用例非常难？"><span class="nav-number">3.</span> <span class="nav-text">4.对于复杂业务，为什么编制完整用例非常难？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-什么是用例图"><span class="nav-number">4.</span> <span class="nav-text">5. 什么是用例图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-用例图的基本符号与元素"><span class="nav-number">5.</span> <span class="nav-text">6. 用例图的基本符号与元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-用例图的画法和步骤"><span class="nav-number">6.</span> <span class="nav-text">7.用例图的画法和步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-用例图给利益相关人与开发者的价值有哪些？"><span class="nav-number">7.</span> <span class="nav-text">8.用例图给利益相关人与开发者的价值有哪些？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、建模练习题（用例模型）"><span class="nav-number">8.</span> <span class="nav-text">二、建模练习题（用例模型）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott-Cai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
