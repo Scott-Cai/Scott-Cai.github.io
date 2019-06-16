@@ -229,6 +229,191 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/06/16/利用github-page-和hexo搭建个人博客/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott-Cai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-Cai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/16/利用github-page-和hexo搭建个人博客/" itemprop="url">利用github page 和hexo搭建个人博客</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-16T12:49:37+08:00">
+                2019-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>Github账号：官网：<a href="https://github.com/" target="_blank" rel="noopener">Github</a></li>
+<li>Git：<a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a>下载安装程序</li>
+<li>Node.js：你可以通过<a href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a>下载安装程序，也可以用Git Bash安装</li>
+<li>Markdown编辑器：推荐Typora，用于写文章，如果你还不知道Markdown，了解下<a href="http://wowubuntu.com/markdown/#list" target="_blank" rel="noopener">Markdown</a>的语法</li>
+</ol>
+<h3 id="Hexo部分"><a href="#Hexo部分" class="headerlink" title="Hexo部分"></a>Hexo部分</h3><h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>打开Git Bash，输入以下命令安装Hexo:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>打开Git Bash，输入命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init [folder]</span><br></pre></td></tr></table></figure>
+<p>[folder]代表的是你的hexo文件夹名，如果不写，就默认在当前文件夹初始化。<br>然后进入你的hexo文件夹.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd [folder]</span><br></pre></td></tr></table></figure>
+<h4 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h4><p>执行generate命令生成静态文件，才能部署到服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g</span><br></pre></td></tr></table></figure>
+<h4 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h4><p>由于还没有配置Github，所以我们先部署到本地服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>默认情况下，访问网址为： <code>http://localhost:4000/</code><br>在某些情况下，你可能4000的端口被占用，可以选择重设端口,我们一般选8080端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo -p 8080 server</span><br></pre></td></tr></table></figure>
+<p>打开浏览器，输入地址 <code>http://localhost:8080/</code> 你就可以看到你初始的博客啦</p>
+<p>hexo准备部分到这里结束，接下来我们将其部署到GitPage上。</p>
+<h3 id="Github部分"><a href="#Github部分" class="headerlink" title="Github部分"></a>Github部分</h3><h4 id="创建Github仓库"><a href="#创建Github仓库" class="headerlink" title="创建Github仓库"></a>创建Github仓库</h4><p>创建与你的Github用户名相对应的Github Page仓库，格式必须是username.github.io。比如我的用户名是Scott-Cai，对应仓库如下：<br><img src="/2019/06/16/利用github-page-和hexo搭建个人博客/利用github page 和hexo搭建个人博客/1.jpg" alt="仓库"></p>
+<h4 id="建立关联"><a href="#建立关联" class="headerlink" title="建立关联"></a>建立关联</h4><p>进入你刚创建的仓库，复制仓库的地址。打开hexo文件夹下的_config.yml文件，拉倒最下面，修改deploy为以下代码，repository后面的是你的仓库地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/Scott-Cai/Scott-Cai.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是，Github仓库有两种连接方式： </p>
+<ul>
+<li>HTTPS：每次上传到仓库都需要输入账号密码 </li>
+<li>SSH：不用每次上传后输入账号密码，但需要配置SSH Key</li>
+</ul>
+<p>配置方法可参考：<a href="http://beiyuu.com/github-pages" target="_blank" rel="noopener">github-pages</a></p>
+<h4 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h4><p>输入以下命令部署到Github Page</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<p>浏览器输入<code>username.github.io</code>就可以看到你的博客啦，如：<a href="https://scott-cai.github.io/">https://scott-cai.github.io/</a></p>
+<p>之后的部署就是三步:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<p>如果不喜欢github指定的的子域名，可以购买域名，然后绑定使用。可以参考如下链接：</p>
+<h4 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h4><p>创建新文章：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+<p>可以在[layout]中指定文章的布局，默认是post，hexo默认有三种布局，每种布局的路径不同：</p>
+<table>
+<thead>
+<tr>
+<th>布局</th>
+<th>路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>post</td>
+<td>source/_post</td>
+</tr>
+<tr>
+<td>page</td>
+<td>source</td>
+</tr>
+<tr>
+<td>draft</td>
+<td>source/_drafts</td>
+</tr>
+</tbody>
+</table>
+<p>新建文件时，Hexo会根据scaffolds目录的模版文件来创建文件，所以你可以修改模版文件来达到更好的初始化效果，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">categories:</span><br><span class="line"></span><br><span class="line">tags:</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是使用categories和tags前需要先生成相应的页面:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page tags</span><br><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
+<h4 id="NexT-主题"><a href="#NexT-主题" class="headerlink" title="NexT 主题"></a>NexT 主题</h4><p>hexo 支持很多主题，我用的是NexT, 相关拓展配置可参考如下链接<a href="https://www.jianshu.com/p/9f0e90cc32c2" target="_blank" rel="noopener">Hexo+NexT搭建酷炫网页</a>，各种功能配置都介绍得很清楚，其中介绍的功能包括：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">NexT安装</span><br><span class="line">切换主题</span><br><span class="line">设置Menu</span><br><span class="line">初始化对应的Menu文件夹</span><br><span class="line">设置动态背景</span><br><span class="line">在右上角或者左上角实现fork me on github</span><br><span class="line">添加添加RSS</span><br><span class="line">修改文章内链接文本样式</span><br><span class="line">修改底部标签样式</span><br><span class="line">在文章末尾添加“文章结束”标记</span><br><span class="line">设置头像并设置动画效果</span><br><span class="line">修改代码块``自定义样式</span><br><span class="line">侧边栏社交小图标设置</span><br><span class="line">主页文章添加阴影效果</span><br><span class="line">网站底部加上访问量</span><br><span class="line">添加热度</span><br><span class="line">网站底部字数统计</span><br><span class="line">设置网站的图标Favicon</span><br><span class="line">实现文章统计功能</span><br><span class="line">添加网页顶部进度加载条</span><br><span class="line">添加来必力云跟帖功能</span><br><span class="line">底部隐藏由Hexo强力驱动、主题--NexT.Mist</span><br><span class="line">去掉底部重复字数统计</span><br><span class="line">添加jiathis分享</span><br><span class="line">博文置顶</span><br><span class="line">修改字体大小</span><br><span class="line">添加DaoVoice在线联系</span><br><span class="line">添加底部桃心</span><br><span class="line">添加侧栏推荐阅读</span><br><span class="line">在文章底部增加版权信息</span><br><span class="line">Hexo博客添加站内搜索</span><br><span class="line">添加外链网易云音乐</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/05/23/系统分析与设计HW7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1873,7 +2058,7 @@ Ubuntu 14.04 请使用以下命令启动：
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
