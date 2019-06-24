@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、部署架构图 二、部署流程1.1 服务器系统环境 腾讯云 Ubuntu 16.04 LTS Server  1.2 Docker 安装 ubuntu 安装参考如下链接：  官方参考链接 中文参考链接  windows安装参考如下链接：(win10仅支持win10 pro)  Windows Docker 安装  1.3 构建自定义的 Python Flask 应用镜像为了Docker化一个 Py">
+<meta property="og:type" content="article">
+<meta property="og:title" content="backend后端部署文档">
+<meta property="og:url" content="https://Scott-Cai.github.io/2019/06/22/backend后端部署文档/index.html">
+<meta property="og:site_name" content="Scott-Cai">
+<meta property="og:description" content="一、部署架构图 二、部署流程1.1 服务器系统环境 腾讯云 Ubuntu 16.04 LTS Server  1.2 Docker 安装 ubuntu 安装参考如下链接：  官方参考链接 中文参考链接  windows安装参考如下链接：(win10仅支持win10 pro)  Windows Docker 安装  1.3 构建自定义的 Python Flask 应用镜像为了Docker化一个 Py">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://scott-cai.github.io/2019/06/22/backend后端部署文档/physical_view.jpg">
+<meta property="og:image" content="https://scott-cai.github.io/2019/06/22/backend后端部署文档/1.png">
+<meta property="og:image" content="https://scott-cai.github.io/2019/06/22/backend后端部署文档/2.png">
+<meta property="og:image" content="https://scott-cai.github.io/2019/06/22/backend后端部署文档/3.jpg">
+<meta property="og:image" content="https://scott-cai.github.io/2019/06/22/backend后端部署文档/4.png">
+<meta property="og:image" content="https://scott-cai.github.io/2019/06/22/backend后端部署文档/5.png">
+<meta property="og:updated_time" content="2019-06-24T16:36:41.211Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="backend后端部署文档">
+<meta name="twitter:description" content="一、部署架构图 二、部署流程1.1 服务器系统环境 腾讯云 Ubuntu 16.04 LTS Server  1.2 Docker 安装 ubuntu 安装参考如下链接：  官方参考链接 中文参考链接  windows安装参考如下链接：(win10仅支持win10 pro)  Windows Docker 安装  1.3 构建自定义的 Python Flask 应用镜像为了Docker化一个 Py">
+<meta name="twitter:image" content="https://scott-cai.github.io/2019/06/22/backend后端部署文档/physical_view.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://Scott-Cai.github.io/2019/06/22/backend后端部署文档/"/>
+
+
+
+
+
+  <title>backend后端部署文档 | Scott-Cai</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Scott-Cai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/06/22/backend后端部署文档/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott-Cai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-Cai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">backend后端部署文档</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-22T22:30:57+08:00">
+                2019-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、部署架构图"><a href="#一、部署架构图" class="headerlink" title="一、部署架构图"></a>一、部署架构图</h2><p><img src="/2019/06/22/backend后端部署文档/physical_view.jpg" alt="物理视图"></p>
+<h2 id="二、部署流程"><a href="#二、部署流程" class="headerlink" title="二、部署流程"></a>二、部署流程</h2><h4 id="1-1-服务器系统环境"><a href="#1-1-服务器系统环境" class="headerlink" title="1.1 服务器系统环境"></a>1.1 服务器系统环境</h4><ul>
+<li>腾讯云 Ubuntu 16.04 LTS Server</li>
+</ul>
+<h4 id="1-2-Docker-安装"><a href="#1-2-Docker-安装" class="headerlink" title="1.2 Docker 安装"></a>1.2 Docker 安装</h4><p> ubuntu 安装参考如下链接：</p>
+<ul>
+<li><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#prerequisites" target="_blank" rel="noopener">官方参考链接</a></li>
+<li><a href="https://yeasy.gitbooks.io/docker_practice/content/install/ubuntu.html" target="_blank" rel="noopener">中文参考链接</a></li>
+</ul>
+<p>windows安装参考如下链接：(win10仅支持win10 pro)</p>
+<ul>
+<li><a href="http://www.runoob.com/docker/windows-docker-install.html" target="_blank" rel="noopener">Windows Docker 安装</a></li>
+</ul>
+<h4 id="1-3-构建自定义的-Python-Flask-应用镜像"><a href="#1-3-构建自定义的-Python-Flask-应用镜像" class="headerlink" title="1.3 构建自定义的 Python Flask 应用镜像"></a>1.3 构建自定义的 Python Flask 应用镜像</h4><p>为了Docker化一个 Python Flask 应用镜像，我们将要构建我们自己的Docker镜像，这意味要创建一个Dockerfile。</p>
+<p>在绝大多数的虚拟机环境中，假如你想要创建一个机器的镜像，你需要首先创建一个虚拟机，然后安装好操作系统，然后安装好应用程序，最后将其转化成一个模板或者镜像。然而，对于Docker来说，这些步骤都可以通过 Dockerfile 进行自动化。一个 Dockerfile 是一个可以向 Docker 提供构建指令的方式。我们将要创建一个可以用来部署一个最简单的 Flask 应用镜像的 Dockerfile 。</p>
+<h5 id="项目内容和结构如下："><a href="#项目内容和结构如下：" class="headerlink" title="项目内容和结构如下："></a>项目内容和结构如下：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── api <span class="comment"># 项目App API源码目录</span></span><br><span class="line">│   ├── account <span class="comment"># 用户相关api</span></span><br><span class="line">│   │   ├── account_function.py</span><br><span class="line">│   │   ├── utils.py <span class="comment"># 辅助函数</span></span><br><span class="line">│   ├── questionnaire <span class="comment"># 问卷相关api</span></span><br><span class="line">│   │   ├── ans_function.py</span><br><span class="line">│   │   ├── que_function.py</span><br><span class="line">│   │   ├── utils.py <span class="comment"># 辅助函数</span></span><br><span class="line">│   ├── task <span class="comment"># 其他任务相关api</span></span><br><span class="line">│   │   ├── task_function.py</span><br><span class="line">│   │   ├── utils.py <span class="comment"># 辅助函数</span></span><br><span class="line">│   ├── utils <span class="comment"># 全局辅助函数</span></span><br><span class="line">│   │   ├── assist.py</span><br><span class="line">│   │   ├── match.py</span><br><span class="line">│   │   ├── utils.py</span><br><span class="line">├── dbTools <span class="comment"># db</span></span><br><span class="line">├── Dockerfile <span class="comment"># Docker文件</span></span><br><span class="line">├── README.md </span><br><span class="line">├── app.py <span class="comment"># app入口</span></span><br><span class="line">├── requirements.txt <span class="comment"># 相关依赖</span></span><br><span class="line">├── setup.md</span><br></pre></td></tr></table></figure>
+<h5 id="app-py里面主函数设置："><a href="#app-py里面主函数设置：" class="headerlink" title="app.py里面主函数设置："></a>app.py里面主函数设置：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试docker后端部署</span></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_docker</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hi!Welcome to our earn_money app!'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    CORS(app, supports_credentials=<span class="keyword">True</span>)</span><br><span class="line">    app.run(host=<span class="string">'0.0.0.0'</span>, port=<span class="number">8082</span>, debug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="requirements-txt"><a href="#requirements-txt" class="headerlink" title="requirements.txt:"></a>requirements.txt:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">flask&gt;=0.10</span><br><span class="line">Werkzeug&gt;=0.9</span><br><span class="line">DBUtils</span><br><span class="line">PyMySQL==0.8.1</span><br><span class="line">redis</span><br><span class="line">flask-cors</span><br><span class="line">flask_login</span><br></pre></td></tr></table></figure>
+<h5 id="编写Dockerfile"><a href="#编写Dockerfile" class="headerlink" title="编写Dockerfile"></a>编写Dockerfile</h5><ul>
+<li><strong>用 <code>From</code> 来继承一个 Docker 镜像</strong></li>
+</ul>
+<p>Dockerfile 的第一条指令是FROM指令。这用来将一个已经存在的 Docker 镜像指定为基础镜像。这基本上为我们提供了继承另一个Docker镜像的方法。除了FROM指令之外，还包含了一个MAINTAINER指令，其是用来显示 Dockerfile 的作者的。然后，使用 <code>ENV LANG C</code> 来解决后面安装 python3 时出现的 locale 问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM python:3.7-alpine</span><br><span class="line">LABEL maintainer=&quot;earn_money&quot;</span><br><span class="line">ENV LANG C.UTF-8d</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>将当前目录里面的代码文件拷贝到镜像里面，并且安装 Python 依赖</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">COPY . /app</span><br><span class="line">WORKDIR /app</span><br><span class="line">RUN pip3 install -r requirements.txt</span><br><span class="line">RUN pip3 install flask-cors --upgrade</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>设置 <code>EntryPoint</code> 去告诉 Docker 在这个 docker container 中运行 <code>python3</code> 的命令，执行 <code>app.py</code></strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;python3&quot;]</span><br><span class="line">CMD [&quot;app.py&quot;]</span><br></pre></td></tr></table></figure>
+<p>总的Dockerfile如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">FROM python:3.7-alpine</span><br><span class="line">LABEL maintainer=&quot;earn_money&quot;</span><br><span class="line">ENV LANG C.UTF-8d</span><br><span class="line"></span><br><span class="line">COPY . /app</span><br><span class="line">WORKDIR /app</span><br><span class="line">RUN pip3 install -r requirements.txt</span><br><span class="line">RUN pip3 install flask-cors --upgrade</span><br><span class="line">ENTRYPOINT [&quot;python3&quot;]</span><br><span class="line">CMD [&quot;app.py&quot;]</span><br></pre></td></tr></table></figure>
+<h4 id="构建自己的Docker-Image"><a href="#构建自己的Docker-Image" class="headerlink" title="构建自己的Docker Image"></a>构建自己的Docker Image</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t earn_money:latest .</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/06/22/backend后端部署文档/1.png" alt=""></p>
+<h4 id="使用你构建的镜像运行一个-Docker-Container"><a href="#使用你构建的镜像运行一个-Docker-Container" class="headerlink" title="使用你构建的镜像运行一个 Docker Container"></a>使用你构建的镜像运行一个 Docker Container</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 8080:8082 earn_money</span><br></pre></td></tr></table></figure>
+<p><code>-d</code>（detach，脱离）标志是用来告诉 Docker 在后台运行容器；另一个标志是 <code>-p</code>，这个标志能让用户来将一个端口从主机机器映射到容器中的一个端口。<br><img src="/2019/06/22/backend后端部署文档/2.png" alt=""><br>不加-d 参数结果如下：（测试时试着用了多个端口）<br><img src="/2019/06/22/backend后端部署文档/3.jpg" alt=""></p>
+<p>我们使用的 Flask 应用默认暴露了 5000 端口来提供HTTP服务。默认情况下，与Docker容器内部绑定的端口并没有与主机系统绑定。为了让外部的系统访问容器内部暴露的端口，这些端口必须通过使用 <code>-p</code> 标志从主机端口映射到容器端口。假如我们想要端口从主机的 8080 端口，映射到容器中的 8082 端口，我们可以通过使用这种语法 <code>-p 8080:8082</code>。</p>
+<p>从上面的命令中，看起来我们的容器已经启动成功了。我们可以通过运行执行<code>docker ps</code> 或者<code>docker container list</code>来验证。<br><img src="/2019/06/22/backend后端部署文档/4.png" alt=""></p>
+<p>在浏览器中访问 <a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080</a> , 你现在应该能够拿到 Python Flask 服务器返回的信息。<br><img src="/2019/06/22/backend后端部署文档/5.png" alt=""></p>
+<h2 id="三、常见问题解决方法"><a href="#三、常见问题解决方法" class="headerlink" title="三、常见问题解决方法"></a>三、常见问题解决方法</h2><h3 id="1-Docker-安装失败"><a href="#1-Docker-安装失败" class="headerlink" title="1. Docker 安装失败"></a>1. Docker 安装失败</h3><p>可能是因为天朝被墙的原因，强烈建议使用国内源而不是官方源，详情可以见前面 docker 安装的<a href="https://yeasy.gitbooks.io/docker_practice/content/install/ubuntu.html" target="_blank" rel="noopener">中文参考链接</a>。</p>
+<h3 id="2-Docker-镜像拉取缓慢"><a href="#2-Docker-镜像拉取缓慢" class="headerlink" title="2. Docker 镜像拉取缓慢"></a>2. Docker 镜像拉取缓慢</h3><p>使用国内镜像源加速。</p>
+<p><a href="https://yeasy.gitbooks.io/docker_practice/content/install/mirror.html" target="_blank" rel="noopener">参考链接</a></p>
+<h3 id="其他不确定错误"><a href="#其他不确定错误" class="headerlink" title="其他不确定错误"></a>其他不确定错误</h3><p>请检查系统环境配置是否和本仓库部署环境一致</p>
+<ul>
+<li>python3.7</li>
+<li>Docker version 18.09.6, build 481bc77</li>
+<li>Ubuntu  Xenial 16.04 (LTS)</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/22/docker部署web应用/" rel="next" title="docker部署web应用">
+                <i class="fa fa-chevron-left"></i> docker部署web应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="[object Object]"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Scott-Cai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、部署架构图"><span class="nav-number">1.</span> <span class="nav-text">一、部署架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、部署流程"><span class="nav-number">2.</span> <span class="nav-text">二、部署流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-服务器系统环境"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.1 服务器系统环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-Docker-安装"><span class="nav-number">2.0.2.</span> <span class="nav-text">1.2 Docker 安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-构建自定义的-Python-Flask-应用镜像"><span class="nav-number">2.0.3.</span> <span class="nav-text">1.3 构建自定义的 Python Flask 应用镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#项目内容和结构如下："><span class="nav-number">2.0.3.1.</span> <span class="nav-text">项目内容和结构如下：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#app-py里面主函数设置："><span class="nav-number">2.0.3.2.</span> <span class="nav-text">app.py里面主函数设置：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#requirements-txt"><span class="nav-number">2.0.3.3.</span> <span class="nav-text">requirements.txt:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写Dockerfile"><span class="nav-number">2.0.3.4.</span> <span class="nav-text">编写Dockerfile</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建自己的Docker-Image"><span class="nav-number">2.0.4.</span> <span class="nav-text">构建自己的Docker Image</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用你构建的镜像运行一个-Docker-Container"><span class="nav-number">2.0.5.</span> <span class="nav-text">使用你构建的镜像运行一个 Docker Container</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、常见问题解决方法"><span class="nav-number">3.</span> <span class="nav-text">三、常见问题解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Docker-安装失败"><span class="nav-number">3.1.</span> <span class="nav-text">1. Docker 安装失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Docker-镜像拉取缓慢"><span class="nav-number">3.2.</span> <span class="nav-text">2. Docker 镜像拉取缓慢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他不确定错误"><span class="nav-number">3.3.</span> <span class="nav-text">其他不确定错误</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott-Cai</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -229,6 +229,348 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/06/22/backend后端部署文档/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott-Cai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-Cai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/22/backend后端部署文档/" itemprop="url">backend后端部署文档</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-22T22:30:57+08:00">
+                2019-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、部署架构图"><a href="#一、部署架构图" class="headerlink" title="一、部署架构图"></a>一、部署架构图</h2><p><img src="/2019/06/22/backend后端部署文档/physical_view.jpg" alt="物理视图"></p>
+<h2 id="二、部署流程"><a href="#二、部署流程" class="headerlink" title="二、部署流程"></a>二、部署流程</h2><h4 id="1-1-服务器系统环境"><a href="#1-1-服务器系统环境" class="headerlink" title="1.1 服务器系统环境"></a>1.1 服务器系统环境</h4><ul>
+<li>腾讯云 Ubuntu 16.04 LTS Server</li>
+</ul>
+<h4 id="1-2-Docker-安装"><a href="#1-2-Docker-安装" class="headerlink" title="1.2 Docker 安装"></a>1.2 Docker 安装</h4><p> ubuntu 安装参考如下链接：</p>
+<ul>
+<li><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#prerequisites" target="_blank" rel="noopener">官方参考链接</a></li>
+<li><a href="https://yeasy.gitbooks.io/docker_practice/content/install/ubuntu.html" target="_blank" rel="noopener">中文参考链接</a></li>
+</ul>
+<p>windows安装参考如下链接：(win10仅支持win10 pro)</p>
+<ul>
+<li><a href="http://www.runoob.com/docker/windows-docker-install.html" target="_blank" rel="noopener">Windows Docker 安装</a></li>
+</ul>
+<h4 id="1-3-构建自定义的-Python-Flask-应用镜像"><a href="#1-3-构建自定义的-Python-Flask-应用镜像" class="headerlink" title="1.3 构建自定义的 Python Flask 应用镜像"></a>1.3 构建自定义的 Python Flask 应用镜像</h4><p>为了Docker化一个 Python Flask 应用镜像，我们将要构建我们自己的Docker镜像，这意味要创建一个Dockerfile。</p>
+<p>在绝大多数的虚拟机环境中，假如你想要创建一个机器的镜像，你需要首先创建一个虚拟机，然后安装好操作系统，然后安装好应用程序，最后将其转化成一个模板或者镜像。然而，对于Docker来说，这些步骤都可以通过 Dockerfile 进行自动化。一个 Dockerfile 是一个可以向 Docker 提供构建指令的方式。我们将要创建一个可以用来部署一个最简单的 Flask 应用镜像的 Dockerfile 。</p>
+<h5 id="项目内容和结构如下："><a href="#项目内容和结构如下：" class="headerlink" title="项目内容和结构如下："></a>项目内容和结构如下：</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── api <span class="comment"># 项目App API源码目录</span></span><br><span class="line">│   ├── account <span class="comment"># 用户相关api</span></span><br><span class="line">│   │   ├── account_function.py</span><br><span class="line">│   │   ├── utils.py <span class="comment"># 辅助函数</span></span><br><span class="line">│   ├── questionnaire <span class="comment"># 问卷相关api</span></span><br><span class="line">│   │   ├── ans_function.py</span><br><span class="line">│   │   ├── que_function.py</span><br><span class="line">│   │   ├── utils.py <span class="comment"># 辅助函数</span></span><br><span class="line">│   ├── task <span class="comment"># 其他任务相关api</span></span><br><span class="line">│   │   ├── task_function.py</span><br><span class="line">│   │   ├── utils.py <span class="comment"># 辅助函数</span></span><br><span class="line">│   ├── utils <span class="comment"># 全局辅助函数</span></span><br><span class="line">│   │   ├── assist.py</span><br><span class="line">│   │   ├── match.py</span><br><span class="line">│   │   ├── utils.py</span><br><span class="line">├── dbTools <span class="comment"># db</span></span><br><span class="line">├── Dockerfile <span class="comment"># Docker文件</span></span><br><span class="line">├── README.md </span><br><span class="line">├── app.py <span class="comment"># app入口</span></span><br><span class="line">├── requirements.txt <span class="comment"># 相关依赖</span></span><br><span class="line">├── setup.md</span><br></pre></td></tr></table></figure>
+<h5 id="app-py里面主函数设置："><a href="#app-py里面主函数设置：" class="headerlink" title="app.py里面主函数设置："></a>app.py里面主函数设置：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试docker后端部署</span></span><br><span class="line"><span class="meta">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_docker</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hi!Welcome to our earn_money app!'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    CORS(app, supports_credentials=<span class="keyword">True</span>)</span><br><span class="line">    app.run(host=<span class="string">'0.0.0.0'</span>, port=<span class="number">8082</span>, debug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="requirements-txt"><a href="#requirements-txt" class="headerlink" title="requirements.txt:"></a>requirements.txt:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">flask&gt;=0.10</span><br><span class="line">Werkzeug&gt;=0.9</span><br><span class="line">DBUtils</span><br><span class="line">PyMySQL==0.8.1</span><br><span class="line">redis</span><br><span class="line">flask-cors</span><br><span class="line">flask_login</span><br></pre></td></tr></table></figure>
+<h5 id="编写Dockerfile"><a href="#编写Dockerfile" class="headerlink" title="编写Dockerfile"></a>编写Dockerfile</h5><ul>
+<li><strong>用 <code>From</code> 来继承一个 Docker 镜像</strong></li>
+</ul>
+<p>Dockerfile 的第一条指令是FROM指令。这用来将一个已经存在的 Docker 镜像指定为基础镜像。这基本上为我们提供了继承另一个Docker镜像的方法。除了FROM指令之外，还包含了一个MAINTAINER指令，其是用来显示 Dockerfile 的作者的。然后，使用 <code>ENV LANG C</code> 来解决后面安装 python3 时出现的 locale 问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM python:3.7-alpine</span><br><span class="line">LABEL maintainer=&quot;earn_money&quot;</span><br><span class="line">ENV LANG C.UTF-8d</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>将当前目录里面的代码文件拷贝到镜像里面，并且安装 Python 依赖</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">COPY . /app</span><br><span class="line">WORKDIR /app</span><br><span class="line">RUN pip3 install -r requirements.txt</span><br><span class="line">RUN pip3 install flask-cors --upgrade</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>设置 <code>EntryPoint</code> 去告诉 Docker 在这个 docker container 中运行 <code>python3</code> 的命令，执行 <code>app.py</code></strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ENTRYPOINT [&quot;python3&quot;]</span><br><span class="line">CMD [&quot;app.py&quot;]</span><br></pre></td></tr></table></figure>
+<p>总的Dockerfile如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">FROM python:3.7-alpine</span><br><span class="line">LABEL maintainer=&quot;earn_money&quot;</span><br><span class="line">ENV LANG C.UTF-8d</span><br><span class="line"></span><br><span class="line">COPY . /app</span><br><span class="line">WORKDIR /app</span><br><span class="line">RUN pip3 install -r requirements.txt</span><br><span class="line">RUN pip3 install flask-cors --upgrade</span><br><span class="line">ENTRYPOINT [&quot;python3&quot;]</span><br><span class="line">CMD [&quot;app.py&quot;]</span><br></pre></td></tr></table></figure>
+<h4 id="构建自己的Docker-Image"><a href="#构建自己的Docker-Image" class="headerlink" title="构建自己的Docker Image"></a>构建自己的Docker Image</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t earn_money:latest .</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/06/22/backend后端部署文档/1.png" alt=""></p>
+<h4 id="使用你构建的镜像运行一个-Docker-Container"><a href="#使用你构建的镜像运行一个-Docker-Container" class="headerlink" title="使用你构建的镜像运行一个 Docker Container"></a>使用你构建的镜像运行一个 Docker Container</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 8080:8082 earn_money</span><br></pre></td></tr></table></figure>
+<p><code>-d</code>（detach，脱离）标志是用来告诉 Docker 在后台运行容器；另一个标志是 <code>-p</code>，这个标志能让用户来将一个端口从主机机器映射到容器中的一个端口。<br><img src="/2019/06/22/backend后端部署文档/2.png" alt=""><br>不加-d 参数结果如下：（测试时试着用了多个端口）<br><img src="/2019/06/22/backend后端部署文档/3.jpg" alt=""></p>
+<p>我们使用的 Flask 应用默认暴露了 5000 端口来提供HTTP服务。默认情况下，与Docker容器内部绑定的端口并没有与主机系统绑定。为了让外部的系统访问容器内部暴露的端口，这些端口必须通过使用 <code>-p</code> 标志从主机端口映射到容器端口。假如我们想要端口从主机的 8080 端口，映射到容器中的 8082 端口，我们可以通过使用这种语法 <code>-p 8080:8082</code>。</p>
+<p>从上面的命令中，看起来我们的容器已经启动成功了。我们可以通过运行执行<code>docker ps</code> 或者<code>docker container list</code>来验证。<br><img src="/2019/06/22/backend后端部署文档/4.png" alt=""></p>
+<p>在浏览器中访问 <a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080</a> , 你现在应该能够拿到 Python Flask 服务器返回的信息。<br><img src="/2019/06/22/backend后端部署文档/5.png" alt=""></p>
+<h2 id="三、常见问题解决方法"><a href="#三、常见问题解决方法" class="headerlink" title="三、常见问题解决方法"></a>三、常见问题解决方法</h2><h3 id="1-Docker-安装失败"><a href="#1-Docker-安装失败" class="headerlink" title="1. Docker 安装失败"></a>1. Docker 安装失败</h3><p>可能是因为天朝被墙的原因，强烈建议使用国内源而不是官方源，详情可以见前面 docker 安装的<a href="https://yeasy.gitbooks.io/docker_practice/content/install/ubuntu.html" target="_blank" rel="noopener">中文参考链接</a>。</p>
+<h3 id="2-Docker-镜像拉取缓慢"><a href="#2-Docker-镜像拉取缓慢" class="headerlink" title="2. Docker 镜像拉取缓慢"></a>2. Docker 镜像拉取缓慢</h3><p>使用国内镜像源加速。</p>
+<p><a href="https://yeasy.gitbooks.io/docker_practice/content/install/mirror.html" target="_blank" rel="noopener">参考链接</a></p>
+<h3 id="其他不确定错误"><a href="#其他不确定错误" class="headerlink" title="其他不确定错误"></a>其他不确定错误</h3><p>请检查系统环境配置是否和本仓库部署环境一致</p>
+<ul>
+<li>python3.7</li>
+<li>Docker version 18.09.6, build 481bc77</li>
+<li>Ubuntu  Xenial 16.04 (LTS)</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/06/22/docker部署web应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott-Cai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Scott-Cai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/22/docker部署web应用/" itemprop="url">docker部署web应用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-22T12:38:00+08:00">
+                2019-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、安装docker"><a href="#一、安装docker" class="headerlink" title="一、安装docker"></a>一、安装docker</h2><h4 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h4><p>Docker CE 支持以下版本的 <a href="https://www.ubuntu.com/server" target="_blank" rel="noopener">Ubuntu</a> 操作系统：</p>
+<ul>
+<li><p>Bionic 18.04 (LTS)</p>
+</li>
+<li><p>Xenial 16.04 (LTS)</p>
+<p>注：win下子系统shell不支持，启动docker会找不到bus.</p>
+</li>
+</ul>
+<p>ubuntu 安装参考如下链接：</p>
+<ul>
+<li><a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#prerequisites" target="_blank" rel="noopener">官方参考链接</a></li>
+<li><a href="https://yeasy.gitbooks.io/docker_practice/content/install/ubuntu.html" target="_blank" rel="noopener">中文参考链接</a></li>
+</ul>
+<h5 id="1-1-卸载旧版本"><a href="#1-1-卸载旧版本" class="headerlink" title="1.1 卸载旧版本"></a>1.1 卸载旧版本</h5><p>旧版本的 Docker 称为 <code>docker</code> 或者 <code>docker-engine</code>，使用以下命令卸载旧版本:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get remove docker docker-engine docker.io containerd runc</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/06/22/docker部署web应用/1.jpg" alt=""></p>
+<h5 id="1-2-添加使用-HTTPS-传输的软件包以及-CA-证书"><a href="#1-2-添加使用-HTTPS-传输的软件包以及-CA-证书" class="headerlink" title="1.2 添加使用 HTTPS 传输的软件包以及 CA 证书"></a>1.2 添加使用 HTTPS 传输的软件包以及 CA 证书</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line"></span><br><span class="line">$ sudo apt-get install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    software-properties-common</span><br></pre></td></tr></table></figure>
+<p>添加软件源的 <code>GPG</code> 密钥（官方源比较慢在注释中）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 官方源</span></span><br><span class="line"><span class="comment"># $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span></span><br></pre></td></tr></table></figure>
+<p>向 <code>source.list</code> 中添加 Docker 软件源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ sudo add-apt-repository \</span><br><span class="line">    <span class="string">"deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \</span></span><br><span class="line"><span class="string">    <span class="variable">$(lsb_release -cs)</span> \</span></span><br><span class="line"><span class="string">    stable"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 官方源</span></span><br><span class="line"><span class="comment"># $ sudo add-apt-repository \</span></span><br><span class="line"><span class="comment">#    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="comment">#    $(lsb_release -cs) \</span></span><br><span class="line"><span class="comment">#    stable"</span></span><br></pre></td></tr></table></figure>
+<h5 id="1-3-安装-Docker-CE"><a href="#1-3-安装-Docker-CE" class="headerlink" title="1.3 安装 Docker CE"></a>1.3 安装 Docker CE</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line"></span><br><span class="line">$ sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure>
+<h5 id="1-4-使用脚本自动安装"><a href="#1-4-使用脚本自动安装" class="headerlink" title="1.4 使用脚本自动安装"></a>1.4 使用脚本自动安装</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">$ sudo sh get-docker.sh --mirror Aliyun</span><br></pre></td></tr></table></figure>
+<h5 id="1-5-启动-Docker-CE"><a href="#1-5-启动-Docker-CE" class="headerlink" title="1.5  启动 Docker CE"></a>1.5  启动 Docker CE</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl <span class="built_in">enable</span> docker</span><br><span class="line">$ sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+<h5 id="1-6-建立-docker-用户组"><a href="#1-6-建立-docker-用户组" class="headerlink" title="1.6 建立 docker 用户组"></a>1.6 建立 docker 用户组</h5><p>默认情况下，<code>docker</code> 命令会使用 <a href="https://en.wikipedia.org/wiki/Unix_domain_socket" target="_blank" rel="noopener">Unix socket</a> 与 Docker 引擎通讯。而只有 <code>root</code> 用户和 <code>docker</code> 组的用户才可以访问 Docker 引擎的 Unix socket。出于安全考虑，一般 Linux 系统上不会直接使用 <code>root</code> 用户。因此，更好地做法是将需要使用 <code>docker</code> 的用户加入 <code>docker</code> 用户组。</p>
+<p>建立 <code>docker</code> 组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo groupadd docker</span><br></pre></td></tr></table></figure>
+<p>将当前用户加入 <code>docker</code> 组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo usermod -aG docker <span class="variable">$USER</span></span><br></pre></td></tr></table></figure>
+<p>退出当前终端并重新登录，进行如下测试。</p>
+<h5 id="1-7-测试-Docker-是否安装正确"><a href="#1-7-测试-Docker-是否安装正确" class="headerlink" title="1.7 测试 Docker 是否安装正确"></a>1.7 测试 Docker 是否安装正确</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$ sudo docker run hello-world</span><br><span class="line"></span><br><span class="line">Unable to find image <span class="string">'hello-world:latest'</span> locally</span><br><span class="line">latest: Pulling from library/hello-world</span><br><span class="line">d1725b59e92d: Pull complete</span><br><span class="line">Digest: sha256:0add3ace90ecb4adbf7777e9aacf18357296e799f81cabc9fde470971e499788</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</span><br><span class="line"></span><br><span class="line">Hello from Docker!</span><br><span class="line">This message shows that your installation appears to be working correctly.</span><br><span class="line"></span><br><span class="line">To generate this message, Docker took the following steps:</span><br><span class="line"> 1. The Docker client contacted the Docker daemon.</span><br><span class="line"> 2. The Docker daemon pulled the <span class="string">"hello-world"</span> image from the Docker Hub.</span><br><span class="line">    (amd64)</span><br><span class="line"> 3. The Docker daemon created a new container from that image <span class="built_in">which</span> runs the</span><br><span class="line">    executable that produces the output you are currently reading.</span><br><span class="line"> 4. The Docker daemon streamed that output to the Docker client, <span class="built_in">which</span> sent it</span><br><span class="line">    to your terminal.</span><br><span class="line"></span><br><span class="line">To try something more ambitious, you can run an Ubuntu container with:</span><br><span class="line"> $ docker run -it ubuntu bash</span><br><span class="line"></span><br><span class="line">Share images, automate workflows, and more with a free Docker ID:</span><br><span class="line"> https://hub.docker.com/</span><br><span class="line"></span><br><span class="line">For more examples and ideas, visit:</span><br><span class="line"> https://docs.docker.com/get-started/</span><br></pre></td></tr></table></figure>
+<p>若能正常输出以上信息，则说明安装成功。</p>
+<h2 id="二、Docker-Compose-安装"><a href="#二、Docker-Compose-安装" class="headerlink" title="二、Docker-Compose 安装"></a>二、Docker-Compose 安装</h2><ul>
+<li><p><a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">官方参考链接</a></p>
+<ol>
+<li>Run this command to download the current stable release of Docker Compose:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>apply executable permissions to the binary:</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Test the installation.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose --version</span><br><span class="line">docker-compose version 1.24.0, build 1110ad01</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="三、Mysql-Client-安装（验证测试用）"><a href="#三、Mysql-Client-安装（验证测试用）" class="headerlink" title="三、Mysql-Client 安装（验证测试用）"></a>三、Mysql-Client 安装（验证测试用）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install mysql-client</span><br></pre></td></tr></table></figure>
+<h2 id="四、服务器程序配置运行"><a href="#四、服务器程序配置运行" class="headerlink" title="四、服务器程序配置运行"></a>四、服务器程序配置运行</h2><h5 id="1-拉取后台源代码"><a href="#1-拉取后台源代码" class="headerlink" title="1. 拉取后台源代码"></a>1. 拉取后台源代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/sysu-change/backend.git</span><br></pre></td></tr></table></figure>
+<h5 id="2-Docker-compose-一键部署"><a href="#2-Docker-compose-一键部署" class="headerlink" title="2. Docker-compose 一键部署"></a>2. Docker-compose 一键部署</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd backend</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<h5 id="3-测试服务器运行状况"><a href="#3-测试服务器运行状况" class="headerlink" title="3. 测试服务器运行状况"></a>3. 测试服务器运行状况</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080</span><br></pre></td></tr></table></figure>
+<p>有获得响应则说明 api 转发部署成功。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl localhost:8080</span><br></pre></td></tr></table></figure>
+<p>若成功 get 到页面文件，则说明使用 vue 写的 web 前端页面转发部署成功。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2019/06/16/eolinker接口管理系统使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1878,379 +2220,13 @@ Ubuntu 14.04 请使用以下命令启动：
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2018/09/12/VirtualBox-Centos/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Scott-Cai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Scott-Cai">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/12/VirtualBox-Centos/" itemprop="url">Win10使用VirtualBox搭建Centos私有云</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-12T09:28:22+08:00">
-                2018-09-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>搭建Ubuntu私有云参照队友：<a href="https://palette25.github.io/2018/09/08/Serive-Computing-Install-Personal-Cloud/" target="_blank" rel="noopener">Win10搭建Ubuntu私有云</a></p>
-<p>MAC环境使用VirtualBox部署Ubuntu私有云参照队友：<a href="https://blog.chenmt.science/2018/09/09/77/" target="_blank" rel="noopener">MAC搭建Ubuntu私有云</a></p>
-<h2 id="1-实验目的"><a href="#1-实验目的" class="headerlink" title="1. 实验目的"></a><strong>1. 实验目的</strong></h2><ol>
-<li>初步了解虚拟化技术，理解云计算的相关概念</li>
-<li>为后续课程提供统一的编程与实验环境</li>
-<li>理解系统工程师面临的困境</li>
-</ol>
-<h2 id="2-实验环境与要求"><a href="#2-实验环境与要求" class="headerlink" title="2. 实验环境与要求"></a><strong>2. 实验环境与要求</strong></h2><ol>
-<li>环境：硬件虚拟化（AMD-V 或 Intel-VT）支持</li>
-<li>要求：用户通过互联网，使用微软远程桌面，远程访问你在PC机上创建的虚拟机；<br>本次实验选择的是虚拟机操作系统 Centos，能使用 NAT 访问外网。</li>
-</ol>
-<h2 id="3-实验内容与过程"><a href="#3-实验内容与过程" class="headerlink" title="3. 实验内容与过程"></a><strong>3. 实验内容与过程</strong></h2><h3 id="实验准备"><a href="#实验准备" class="headerlink" title="实验准备"></a><strong>实验准备</strong></h3><ol>
-<li>下载安装 VirtualBox：<a href="https://www.virtualbox.org/" target="_blank" rel="noopener">官网</a></li>
-<li>下载安装Git客户端（git bash): <a href="https://gitforwindows.org/" target="_blank" rel="noopener">git for Windows</a></li>
-<li>下载Linux发行版镜像： <a href="https://www.centos.org/download/" target="_blank" rel="noopener">Centos Minimal ISO</a></li>
-</ol>
-<h3 id="VirtualBox-配置"><a href="#VirtualBox-配置" class="headerlink" title="VirtualBox 配置"></a><strong>VirtualBox 配置</strong></h3><ol>
-<li>配置 VirtualBox 虚拟机存储位置，避免找不到虚拟机存储位置，特别是消耗启动盘的宝贵空间</li>
-</ol>
-<ul>
-<li>VirtualBox菜单 ：管理 -&gt; 全局设定，常规页面</li>
-</ul>
-<ol start="2">
-<li>创建虚拟机内部虚拟网络，使得 Vbox 内部虚拟机可以通过它，实现虚拟机之间、虚拟机与主机的通讯</li>
-</ol>
-<ul>
-<li>VirtualBox菜单 ：管理 -&gt; 主机网络管理器，创建一块虚拟网卡，将网卡改为手动配置，自行修改Ipv4地址，网址分配：192.168.100.1/24。作为虚拟内部网络host的地址</li>
-<li>在主机 windows 命令行窗口输入 ipconfig 就可以看到 VirtualBox Host-Only Network: 的网卡</li>
-</ul>
-<p><img src="/2018/09/12/VirtualBox-Centos/1.png" alt="网卡信息"></p>
-<h3 id="VirtualBox-创建Centos虚拟机"><a href="#VirtualBox-创建Centos虚拟机" class="headerlink" title="VirtualBox 创建Centos虚拟机"></a><strong>VirtualBox 创建Centos虚拟机</strong></h3><ol>
-<li>VirtualBox-&gt;新建，命名centos1</li>
-<li>进入设置</li>
-</ol>
-<ul>
-<li>系统-&gt;处理器-&gt;虚拟机CPU、内存采用默认</li>
-<li>显示-&gt;显存默认36MB</li>
-<li>存储，设为30G。避免以后扩展难</li>
-<li>网络，第一块网卡必须是 NAT，不用更改；第二块网卡连接方式： Host-Only，接口就是前面创建的虚拟网卡</li>
-<li>存储-&gt;控制器-&gt;没有盘片，点击右侧光盘图案加载之前下载的iso文件。OK结束。</li>
-</ul>
-<ol start="3">
-<li>启动安装</li>
-</ol>
-<ul>
-<li>点启动，系统进入安装状态。 </li>
-<li>安装过程中，光标键盘会被 VirtualBox 捕捉，按“右Ctrl”键释放 </li>
-<li>选语言“中文” </li>
-<li>配置“安装位置” -&gt;自动分区</li>
-<li>配置“网络与主机名” -&gt;示例中主机名设为centos1<ul>
-<li>点击以太网（enOs3）右侧开启，复制DNS</li>
-<li>点击以太网（enOs8）右侧开启,按“配置”，选 IPv4 设置，设置手动地址，例如：192.168.100.50,255.255.255.0,192.168.100.1。DNS可以配置第一块网卡DNS。完成。</li>
-</ul>
-</li>
-<li>继续安装，设置root 用户密码，创建第一个用户的账号与密码。 等待安装完成，重启。</li>
-<li>检查网卡设置<ul>
-<li>输入nmtui命令，可选择编辑连接，激活网卡，更改主机名等操作。在activate界面手动激活网卡，因为这里默认开机时不会启动网卡。当然，也可以设置它开机时自动启动。找到网卡的配置文件（在/etc/sysconfig/network-scripts中），将ifcfg-enp0s8和ifcfg-enp0s3（名称对应你的网卡名称）中的ONBOOT选项都改为true，这样就能开机自启了。输su命令然后输入密码回到root(获取权限),使用 yum 安装vim,可参照： <a href="https://blog.csdn.net/u013233097/article/details/52355256" target="_blank" rel="noopener">Centos下安装vim</a></li>
-<li>nmcli可查看配置结果</li>
-<li>检查外网，例如： ping mail.163.com</li>
-<li><img src="/2018/09/12/VirtualBox-Centos/2.png" alt="检查外网"></li>
-<li>ping主机，检查内部网络，本文实例为：ping 192.168.100.1</li>
-<li><img src="/2018/09/12/VirtualBox-Centos/3.png" alt="检查内网"></li>
-<li>在Windows端，ping 192.168.100.50</li>
-<li><img src="/2018/09/12/VirtualBox-Centos/4.png" alt="主机ping虚拟机"></li>
-<li>升级系统：yum update</li>
-<li>检查组安装包： yum grouplist</li>
-<li>退出并关闭虚拟机</li>
-</ul>
-</li>
-</ul>
-<ol start="4">
-<li>复制虚拟机</li>
-</ol>
-<ul>
-<li>点击centos1选择复制，输入新虚拟机名称centos2,注意必须勾选选择重新初始化所有网卡的 MAC 地址。然后选择链接复制</li>
-<li>参照上文用nmtui 修改主机名和第二块网卡IP地址，这里设为192.168.100.100</li>
-<li>重启后在主机上，应能 ping 到这个地址</li>
-</ul>
-<ol start="5">
-<li>安装centos桌面</li>
-</ol>
-<ul>
-<li>重新配置虚拟机CPU, 内存， 显存（调高），示例中设置为2CPU，4G内存，64M显存。且启用3D加速。</li>
-<li>启动虚拟机用 yum groupinstall “GNOME Desktop”命令安装桌面。</li>
-<li>用 ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target 命令设置启动桌面。然后重启即可用桌面。</li>
-<li><img src="/2018/09/12/VirtualBox-Centos/6.png" alt="桌面"></li>
-</ul>
-<h3 id="配置用SSH访问虚拟机"><a href="#配置用SSH访问虚拟机" class="headerlink" title="配置用SSH访问虚拟机"></a><strong>配置用SSH访问虚拟机</strong></h3><ul>
-<li><p>可参考： <a href="https://blog.csdn.net/trackle400/article/details/52755571" target="_blank" rel="noopener">虚拟机下Centos开启ssh连接</a></p>
-</li>
-<li><p>用 yum list installed | grep openssh-server 命令确认Centos7是否安装openssh-server,如果没安装，用yum install openssh-server 命令安装。</p>
-</li>
-<li><p>用vim 打开/etc/ssh/sshd_config, 将Port、ListenAddress前的＃号去除，并把PermitRootLogin(允许远程登陆)和PasswordAuthentication（使用用户密码作为连接验证）设为yes 。保存后退出</p>
-</li>
-<li><p><img src="/2018/09/12/VirtualBox-Centos/7.png" alt="去#号"></p>
-</li>
-<li><p><img src="/2018/09/12/VirtualBox-Centos/8.png" alt="允许远程登陆"></p>
-</li>
-<li><p><img src="/2018/09/12/VirtualBox-Centos/9.png" alt="使用用户密码作为连接验证"></p>
-</li>
-<li><p>重启后开启sshd服务，sudo service sshd start</p>
-</li>
-<li><p>在Windows端启用Git bash测试连接 </p>
-<ul>
-<li><p>输入命令 ssh <a href="mailto:root@192.168.100.100" target="_blank" rel="noopener">root@192.168.100.100</a>即可从Windows端登陆并进行操作</p>
-</li>
-<li><p><img src="/2018/09/12/VirtualBox-Centos/10.png" alt="ssh连接"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="配置用远程桌面访问虚拟机"><a href="#配置用远程桌面访问虚拟机" class="headerlink" title="配置用远程桌面访问虚拟机"></a><strong>配置用远程桌面访问虚拟机</strong></h3><ul>
-<li>可参照： <a href="https://www.jianshu.com/p/6f0f35fa2c4f" target="_blank" rel="noopener">如何设置VirtualBox虚拟机远程访问模式</a></li>
-<li>安装可以启用VirtualBox远程显示系统的扩展包: <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">Oracle VM VirtualBox Extension Pack下载</a></li>
-<li>关闭所有运行中的虚拟机（不能挂起）</li>
-<li>管理-&gt;全局设定-&gt;扩展-&gt;右侧Add Packet按钮选择下载的扩展包。</li>
-<li>安装完成后，重启宿主机。</li>
-<li>点击某一台虚拟机（示例中为centos2）,设置-&gt;显示-&gt;远程桌面，勾选启用服务器，并设置服务器端口，这里设置为192.168.100.1：5000。连接所使用的是宿主机的IP地址，而不是子机。每台子机的端口号要不同以避免冲突。</li>
-<li>先启动虚拟机，然后在Windows端启用远程桌面连接，输入宿主机IP:端口号，即192.168.100.1：5000。点击连接即可。</li>
-<li><img src="/2018/09/12/VirtualBox-Centos/11.png" alt="远程桌面"></li>
-<li></li>
-</ul>
-<p>私有云完工！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://Scott-Cai.github.io/2018/09/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Scott-Cai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Scott-Cai">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/11/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-11T23:42:52+08:00">
-                2018-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -2294,7 +2270,7 @@ Ubuntu 14.04 请使用以下命令启动：
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
